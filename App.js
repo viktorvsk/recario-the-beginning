@@ -7,12 +7,12 @@ import AppNavigator from "./navigation/AppNavigator";
 const store = configureStore();
 
 export default class App extends React.Component {
+
+
     render() {
         return (
             <Provider store={store}>
-                <View style={{ flex: 1 }}>
-                    <AppNavigator />
-                </View>
+                <AppNavigator />
             </Provider>
         );
     }

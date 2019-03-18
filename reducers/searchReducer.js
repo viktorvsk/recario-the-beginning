@@ -2,7 +2,7 @@ import * as ActionTypes from "../actions/actionTypes";
 
 const initialState = {
     isLoading: false,
-    cars: [],
+    cars: {},
     filters: {
         "q[price_min]": 5000,
         "q[price_max]": 10000,
@@ -35,7 +35,7 @@ export default function searchReducer(state = initialState, action = {}) {
     case ActionTypes.GET_MODELS_FAILED:
         return {
             ...state,
-            cars: [],
+            cars: {},
             isLoading: false
         };
     case ActionTypes.SEARCH_FILTER_CHANGED:

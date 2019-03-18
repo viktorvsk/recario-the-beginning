@@ -3,16 +3,24 @@ import { Platform } from "react-native";
 import { createStackNavigator, createBottomTabNavigator } from "react-navigation";
 
 import TabBarIcon from "../components/TabBarIcon";
+import FiltersContainer from "../components/containers/FiltersContainer";
 import SearchContainer from "../components/containers/SearchContainer";
 import ModelContainer from "../components/containers/ModelContainer";
 import AdContainer from "../components/containers/AdContainer";
+import AdsListContainer from "../components/containers/AdsListContainer";
+import SearchModelContainer from "../components/containers/SearchModelContainer";
 
-const AdStack = createStackNavigator({
-    Ad: AdContainer,
-});
 
-AdStack.navigationOptions = {
-    tabBarLabel: "Ad",
+const SearchStack = createStackNavigator({
+    Filters: FiltersContainer,
+    SearchResults: SearchContainer,
+    Model: ModelContainer,
+    AdsList: AdsListContainer,
+    Ad: AdContainer
+}, {initialRouteName: "Filters"});
+
+SearchStack.navigationOptions = {
+    tabBarLabel: "Поиск",
     tabBarIcon: ({ focused }) => (
         <TabBarIcon
             focused={focused}
@@ -21,26 +29,12 @@ AdStack.navigationOptions = {
     ),
 };
 
-const SearchStack = createStackNavigator({
-    Search: SearchContainer,
-});
-
-SearchStack.navigationOptions = {
-    tabBarLabel: "Search",
-    tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-            focused={focused}
-            name='ios-list'
-        />
-    ),
-};
-
 const ModelStack = createStackNavigator({
-    Model: ModelContainer,
+    SearchModel: SearchModelContainer
 });
 
 ModelStack.navigationOptions = {
-    tabBarLabel: "Model",
+    tabBarLabel: "Модель",
     tabBarIcon: ({ focused }) => (
         <TabBarIcon
             focused={focused}
@@ -50,7 +44,6 @@ ModelStack.navigationOptions = {
 };
 
 export default createBottomTabNavigator({
-    AdStack,
     SearchStack,
-    ModelStack,
+    ModelStack
 });

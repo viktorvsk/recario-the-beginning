@@ -27,16 +27,11 @@ export default function autocompleteReducer(state = autocompleteInitialState, ac
         };
 
     case ActionTypes.MAYBE_UPDATE_SUGGESTIONS:
-        if (action.value !== state.value) {
-            return {
-                ...state,
-                isLoading: false
-            };
-        }
 
         return {
             ...state,
             suggestions: action.suggestions,
+            value: action.value,
             isLoading: false
         };
     case ActionTypes.LOAD_SUGGESTIONS_FAILED:

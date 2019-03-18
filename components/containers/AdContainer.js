@@ -1,17 +1,61 @@
 import React from "react";
-import { NavigationEvents } from "react-navigation";
-import { Title, Container, Content, Text } from "native-base";
+import PropTypes from "prop-types";
+import {NavigationEvents} from "react-navigation";
+import AdScreen from "../screens/AdScreen";
+import {connect} from "react-redux";
 
-export default class AdContainer extends React.PureComponent {
+import {loadAd} from "../../actions/adsActions";
+
+class AdContainer extends React.PureComponent {
+  static navigationOptions = {
+    title: "reCar.io"
+  }
+
+    componentDidMount() {
+        const navParams = this.props.navigation.state.params;
+        if (typeof navParams === "undefined") { return }
+        this.props.loadAd(navParams.id);
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps){
+        const currentId = (this.props.navigation.state.params || {}).id;
+        const nextId = (nextProps.navigation.state.params || {}).id;
+
+        if (currentId !== nextId) {
+          this.props.loadAd(nextId)
+        }
+
+    }
 
     render() {
-        return (
-            <Container padder>
-                <Content>
-                    <Title><Text>Ad</Text></Title>
-                </Content>
+        const {navigation, isLoading, ad, settingsFilters} = this.props;
+        return(
+            <AdScreen
+                nav={navigation}
+                isLoading={isLoading}
+                ad={ad}
+                filters={settingsFilters}
+            />
 
-            </Container>
         );
     }
 }
+
+function mapStateToProps(state, props) {
+    const currentAdId = (props.navigation.state.params || {}).id;
+
+    return {
+        isLoading: state.ads.isLoading,
+        ad: state.ads.currentAd,
+        settingsFilters: state.settings.filters
+
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        loadAd: (id) => { dispatch(loadAd(id)); }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdContainer);

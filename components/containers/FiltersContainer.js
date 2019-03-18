@@ -2,17 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import { NavigationEvents } from "react-navigation";
-import MakerModelsTabs from "../MakerModelsTabs";
+import FiltersBar from "../FiltersBar";
+
+import { Container, Content } from "native-base";
+
 
 import {changeFilters} from "../../actions/changeFiltersActions";
 import {performSearch} from "../../actions/searchActions";
 import {fetchSettings} from "../../actions/settingsActions";
 
-class SearchContainer extends React.PureComponent {
-
+class FiltersContainer extends React.PureComponent {
   static navigationOptions = {
     title: "reCar.io",
-    headerBackTitle: "Модели"
+    headerBackTitle: "Фильтр"
   }
 
     componentDidMount() {
@@ -22,21 +24,25 @@ class SearchContainer extends React.PureComponent {
     render() {
         const {navigation, settings, cars, isLoading, filters, onChange, onSelectChange, onSubmit} = this.props;
         return (
-            <MakerModelsTabs settings={settings}
-                cars={cars}
-                isLoading={isLoading}
-                filters={filters}
-                onChange={onChange}
-                onSelectChange={onSelectChange}
-                onSubmit={onSubmit}
-                nav={navigation}
-            />
+            <Container padder>
+                <Content>
+                    <FiltersBar settings={settings}
+                        cars={cars}
+                        isLoading={isLoading}
+                        filters={filters}
+                        onChange={onChange}
+                        onSelectChange={onSelectChange}
+                        onSubmit={onSubmit}
+                        nav={navigation}
+                    />
+                </Content>
+            </Container>
 
         );
     }
 }
 
-SearchContainer.propTypes = {
+FiltersContainer.propTypes = {
     settings: PropTypes.object.isRequired,
     cars: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
@@ -64,4 +70,4 @@ function mapDispatchToProps(dispatch) {
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(FiltersContainer);

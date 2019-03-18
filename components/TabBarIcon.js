@@ -1,7 +1,7 @@
 import React from "react";
 import { Icon } from "expo";
 
-export default class TabBarIcon extends React.Component {
+export default class TabBarIcon extends React.PureComponent {
     render() {
         return (
             <Icon.Ionicons

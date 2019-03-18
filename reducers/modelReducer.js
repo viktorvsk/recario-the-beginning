@@ -3,10 +3,10 @@ import * as ActionTypes from "../actions/actionTypes";
 const initialState = {
     years: [],
     adsFilters: {
-        gearType: [],
+        gearType: "",
         fuelType: "",
         wheelsType: "",
-        city: undefined
+        city: ""
     }
 };
 

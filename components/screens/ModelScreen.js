@@ -1,6 +1,6 @@
 import React from "react";
 import {Image} from "react-native";
-import {Button, Container, Content, Spinner, Text, Title, Picker, Item, View, Header} from "native-base";
+import {Button, Container, Content, Spinner, Text, Title, Picker, Item, View, Header, Form} from "native-base";
 
 
 
@@ -13,6 +13,9 @@ export default class ModelScreen extends React.PureComponent {
         const {nav, currentModelId, title, currentYear, adsLoading, modelLoading, years, ads, onChange, onFilter, currentAdsFilters, filters, preview, settingsFilters} = this.props;
         const currentYearRow = years.filter(row => row.year === currentYear)[0];
         const onPress = () => nav.push("AdsList");
+        const cities =  ads.filter((value, index, self) => self.map(x => x.region).indexOf(value.region) === index)
+            .filter(ad => ad.region && ad.region.trim() !== "")
+            .map(ad => { return { id: ad.region, title: ad.region }; });
 
         const adsToShow = filterAds(ads, currentAdsFilters);
 
@@ -21,12 +24,13 @@ export default class ModelScreen extends React.PureComponent {
 
             <Container padder>
 
-                {title && <Content>
-                    <Title><Text>{title}</Text></Title>
+                <Content>
+                    <Title>{title}</Title>
 
                     <Picker
                         mode="dropdown"
                         iosHeader="Выберите год"
+                        headerBackButtonText="Назад"
                         placeholder="Выберите год..."
                         selectedValue={currentYear}
                         onValueChange={(year) => { onChange(currentModelId, year);}}
@@ -35,7 +39,7 @@ export default class ModelScreen extends React.PureComponent {
                     </Picker>
 
 
-                    {preview && <Image style={{ height: 300, flex: 1 }} source={{uri: preview}} />}
+                    <Image style={{ height: 300, flex: 1 }} source={{uri: preview}} />
 
                     {years.length > 0 && currentYear &&
                         <Content padder>
@@ -45,56 +49,71 @@ export default class ModelScreen extends React.PureComponent {
                     }
 
                     {ads.length > 0 &&
-                        <React.Fragment>
-                            <Picker
-                                mode="dropdown"
-                                iosHeader="Коробка"
-                                placeholder="Коробка"
-                                selectedValue={currentAdsFilters["gearType"]}
-                                onValueChange={value => onFilter("gearType", value)}
-                            >
-                                {settingsFilters["gear_types"].map(t => <Picker.Item value={t.id} key={t.id} label={t.title}/>)}
-                            </Picker>
-                            <Picker
-                                mode="dropdown"
-                                iosHeader="Топливо"
-                                placeholder="Топливо"
-                                selectedValue={currentAdsFilters["fuelType"]}
-                                onValueChange={value => onFilter("fuelType", value)}
-                            >
-                                {settingsFilters["fuel_types"].map(t => <Picker.Item value={t.id} key={t.id} label={t.title}/>)}
-                            </Picker>
-                            <Picker
-                                mode="dropdown"
-                                iosHeader="Привод"
-                                placeholder="Привод"
-                                selectedValue={currentAdsFilters["wheelsType"]}
-                                onValueChange={value => onFilter("wheelsType", value)}
-                            >
-                                {settingsFilters["wheels_types"].map(t => <Picker.Item value={t.id} key={t.id} label={t.title}/>)}
-                            </Picker>
-                            <Picker
-                                mode="dropdown"
-                                iosHeader="Город"
-                                placeholder="Город"
-                                selectedValue={currentAdsFilters["city"]}
-                                onValueChange={value => onFilter("city", value)}
-                            >
-                                {settingsFilters["wheels_types"].map(t => <Picker.Item value={t.id} key={t.id} label={t.title}/>)}
-                            </Picker>
-                        </React.Fragment>
+                        <Form>
+                            <Item picker style={{paddingLeft: 15}} >
+                                <Text style={{width: "50%"}}>Тип КПП</Text>
+                                <Picker
+                                    mode="dropdown"
+                                    iosHeader="Выберите тип КПП"
+                                    headerBackButtonText="Назад"
+                                    placeholder="Любая"
+                                    selectedValue={currentAdsFilters["gearType"]}
+                                    onValueChange={value => onFilter("gearType", value)}
+                                >
+                                    <Picker.Item value="" label="Любая"/>
+                                    {settingsFilters["gear_types"].map(t => <Picker.Item value={t.id} key={t.id} label={t.title}/>)}
+                                </Picker>
+                            </Item>
+                            <Item picker style={{paddingLeft: 15}} >
+                                <Text style={{width: "50%"}}>Тип топлива</Text>
+                                <Picker
+                                    mode="dropdown"
+                                    iosHeader="Выберите тип топлива"
+                                    headerBackButtonText="Назад"
+                                    placeholder="Любое"
+                                    selectedValue={currentAdsFilters["fuelType"]}
+                                    onValueChange={value => onFilter("fuelType", value)}
+                                >
+                                    <Picker.Item value="" label="Любое"/>
+                                    {settingsFilters["fuel_types"].map(t => <Picker.Item value={t.id} key={t.id} label={t.title}/>)}
+                                </Picker>
+                            </Item>
+                            <Item picker style={{paddingLeft: 15}} >
+                                <Text style={{width: "50%"}}>Тип привода</Text>
+                                <Picker
+                                    mode="dropdown"
+                                    iosHeader="Выберите тип привода"
+                                    headerBackButtonText="Назад"
+                                    placeholder="Любой"
+                                    selectedValue={currentAdsFilters["wheelsType"]}
+                                    onValueChange={value => onFilter("wheelsType", value)}
+                                >
+                                    <Picker.Item value="" label="Любой"/>
+                                    {settingsFilters["wheels_types"].map(t => <Picker.Item value={t.id} key={t.id} label={t.title}/>)}
+                                </Picker>
+                            </Item>
+                            <Item picker style={{paddingLeft: 15}} >
+                                <Text style={{width: "50%"}}>Город</Text>
+                                <Picker
+                                    mode="dropdown"
+                                    iosHeader="Выберите город"
+                                    headerBackButtonText="Назад"
+                                    placeholder="Любой"
+                                    selectedValue={currentAdsFilters["city"]}
+                                    onValueChange={value => onFilter("city", value)}
+                                >
+                                    <Picker.Item value="" label="Любой"/>
+                                    {cities.map(t => <Picker.Item value={t.id} key={t.id} label={t.title}/>)}
+                                </Picker>
+                            </Item>
+                            <View style={{margin: 20, justifyContent: "center", flexDirection: "row"}}>
+                                <Button rounded block primary onPress={onPress} style={{width: "90%"}}>
+                                    <Text>Показать {adsToShow.length} объявлений</Text>
+                                </Button>
+                            </View>
+                        </Form>
                     }
-
-                    {ads.length > 0 &&
-                    <View style={{margin: 20, justifyContent: "center", flexDirection: "row"}}>
-                        <Button rounded block primary onPress={onPress} style={{width: "90%"}}>
-                            <Text>Показать {adsToShow.length} объявлений</Text>
-                        </Button>
-                    </View>
-                    }
-
-
-                </Content>}
+                </Content>
             </Container>
 
         );

@@ -70,47 +70,59 @@ export default class FiltersBar extends React.PureComponent {
                     </View>
                 </Item>
 
-                <Item picker>
+                <Item picker style={{paddingLeft: 15}}>
+                    <Text style={{width: "50%"}}>КПП</Text>
                     <Picker
                         mode="dropdown"
                         iosHeader="Выберите КПП"
-                        placeholder="КПП"
+                        headerBackButtonText="Назад"
+                        placeholder="Любая"
                         selectedValue={filters["q[gear_type_id]"]}
                         onValueChange={onGearChange}
                     >
+                        <Picker.Item value="" label="Любая"/>
                         {settings.filters.gear_types.map(option => pickerGenerator(option))}
                     </Picker>
                 </Item>
-                <Item picker>
+                <Item picker style={{paddingLeft: 15}}>
+                    <Text style={{width: "50%"}}>Тип топлива</Text>
                     <Picker
                         mode="dropdown"
                         iosHeader="Выберите тип топлива"
-                        placeholder="Топливо"
+                        headerBackButtonText="Назад"
+                        placeholder="Любое"
                         selectedValue={filters["q[fuel_type_id]"]}
                         onValueChange={onFuelChange}
                     >
+                        <Picker.Item value="" label="Любое"/>
                         {settings.filters.fuel_types.map(option => pickerGenerator(option))}
                     </Picker>
                 </Item>
-                <Item picker>
+                <Item picker style={{paddingLeft: 15}}>
+                    <Text style={{width: "50%"}}>Тип привода</Text>
                     <Picker
                         mode="dropdown"
                         iosHeader="Выберите привод"
-                        placeholder="Привод"
+                        headerBackButtonText="Назад"
+                        placeholder="Любой"
                         selectedValue={filters["q[wheels_type_id]"]}
                         onValueChange={onWheelsChange}
                     >
+                        <Picker.Item value="" label="Любой"/>
                         {settings.filters.wheels_types.map(option => pickerGenerator(option))}
                     </Picker>
                 </Item>
-                <Item picker>
+                <Item picker style={{paddingLeft: 15}}>
+                    <Text style={{width: "50%"}}>Тип кузова</Text>
                     <Picker
                         mode="dropdown"
                         iosHeader="Выберите кузов"
-                        placeholder="Кузов"
+                        headerBackButtonText="Назад"
+                        placeholder="Любой"
                         selectedValue={filters["q[carcass_type_id]"]}
                         onValueChange={onCarcassChange}
                     >
+                        <Picker.Item value="" label="Любой"/>
                         {settings.filters.carcass_types.map(option => pickerGenerator(option))}
                     </Picker>
                 </Item>

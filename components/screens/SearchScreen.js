@@ -14,10 +14,10 @@ export default class SearchScreen extends React.PureComponent {
             <Container padder>
                 <Content>
                     <FiltersBar filters={filters}
-                        onSubmit={onSubmit}
-                        onChange={onChange}
-                        settings={settings}
-                        nav={nav}
+                                onSubmit={onSubmit}
+                                onChange={onChange}
+                                settings={settings}
+                                nav={nav}
                     />
                     {isLoading ? <Spinner/> : <MakerModelsTabs cars={cars} settings={settings} nav={nav}/>}
                 </Content>

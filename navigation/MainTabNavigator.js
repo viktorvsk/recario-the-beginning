@@ -23,12 +23,7 @@ const SearchStack = createStackNavigator({
 
 SearchStack.navigationOptions = {
     tabBarLabel: "Поиск",
-    tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-            focused={focused}
-            name='ios-search'
-        />
-    ),
+    tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name='ios-search'/>
 };
 
 const ModelStack = createStackNavigator({
@@ -37,12 +32,7 @@ const ModelStack = createStackNavigator({
 
 ModelStack.navigationOptions = {
     tabBarLabel: "Модель",
-    tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-            focused={focused}
-            name={Platform.OS === "ios" ? "ios-car" : "md-options"}
-        />
-    ),
+    tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === "ios" ? "ios-car" : "md-options"}/>
 };
 
 const SettingsStack = createStackNavigator({
@@ -51,12 +41,7 @@ const SettingsStack = createStackNavigator({
 
 SettingsStack.navigationOptions = {
     tabBarLabel: "Настройки",
-    tabBarIcon: ({ focused }) => (
-        <TabBarIcon
-            focused={focused}
-            name={Platform.OS === "ios" ? "ios-settings" : "md-settings"}
-        />
-    ),
+    tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === "ios" ? "ios-settings" : "md-settings"}/>
 };
 
 export default createBottomTabNavigator({

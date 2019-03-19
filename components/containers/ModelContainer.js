@@ -31,21 +31,23 @@ class ModelContainer extends React.PureComponent {
 
   render() {
       const {navigation, years, onChange, onFilter, ads, adsLoading, isLoading, currentYear, currentAdsFilters, filters, preview, settingsFilters, currentModelId, title} = this.props;
+
       if (isLoading) { return <Spinner />; }
+
       return(
           <ModelScreen title={title}
-              currentModelId={currentModelId}
-              currentYear={currentYear}
-              adsLoading={adsLoading}
-              years={years}
-              ads={ads}
-              onChange={onChange}
-              onFilter={onFilter}
-              currentAdsFilters={currentAdsFilters}
-              filters={filters}
-              preview={preview}
-              settingsFilters={settingsFilters}
-              nav={navigation}
+                       currentModelId={currentModelId}
+                       currentYear={currentYear}
+                       adsLoading={adsLoading}
+                       years={years}
+                       ads={ads}
+                       onChange={onChange}
+                       onFilter={onFilter}
+                       currentAdsFilters={currentAdsFilters}
+                       filters={filters}
+                       preview={preview}
+                       settingsFilters={settingsFilters}
+                       nav={navigation}
           />
 
       );

@@ -31,13 +31,11 @@ class AdContainer extends React.PureComponent {
 
   render() {
       const {navigation, isLoading, ad, settingsFilters} = this.props;
-      if (isLoading) { return <Spinner/>;}
-      return(
-          <AdScreen nav={navigation}
-              ad={ad}
-              filters={settingsFilters}
-          />
 
+      if (isLoading) { return <Spinner/>; }
+
+      return(
+          <AdScreen nav={navigation} ad={ad} filters={settingsFilters} />
       );
   }
 }

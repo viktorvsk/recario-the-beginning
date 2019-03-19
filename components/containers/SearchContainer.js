@@ -21,15 +21,16 @@ class SearchContainer extends React.PureComponent {
 
   render() {
       const {navigation, settings, carModels, isLoading, filters, onChange, onSelectChange, onSubmit} = this.props;
+
       return (
           <MakerModelsTabs settings={settings}
-              carModels={carModels}
-              isLoading={isLoading}
-              filters={filters}
-              onChange={onChange}
-              onSelectChange={onSelectChange}
-              onSubmit={onSubmit}
-              nav={navigation}
+                           carModels={carModels}
+                           isLoading={isLoading}
+                           filters={filters}
+                           onChange={onChange}
+                           onSelectChange={onSelectChange}
+                           onSubmit={onSubmit}
+                           nav={navigation}
           />
 
       );

@@ -39,9 +39,6 @@ export default class AdScreen extends React.PureComponent {
                         {race && <ListItem><Left><Text>Пробег</Text></Left><Right style={{minWidth: 100}}><Text>{race/1000} тыс. км</Text></Right></ListItem>}
                     </List>
 
-
-
-
                     <Text style={{padding: 16}}>{description || "Описание отсутствует"}</Text>
                     <Text style={{padding: 16}}>Источник: {url}</Text>
 

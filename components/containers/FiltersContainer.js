@@ -21,15 +21,16 @@ class FiltersContainer extends React.PureComponent {
 
   render() {
       const {navigation, settings, filters, onChange, onSelectChange, onSubmit} = this.props;
+
       return (
           <Container padder>
               <Content>
                   <FiltersBar settings={settings}
-                      filters={filters}
-                      onChange={onChange}
-                      onSelectChange={onSelectChange}
-                      onSubmit={onSubmit}
-                      nav={navigation}
+                              filters={filters}
+                              onChange={onChange}
+                              onSelectChange={onSelectChange}
+                              onSubmit={onSubmit}
+                              nav={navigation}
                   />
               </Content>
           </Container>

@@ -32,12 +32,11 @@ class AdsListContainer extends React.PureComponent {
 
       return(
           <AdsListScreen dataProvider={dataProvider}
-              rowRenderer={rowRenderer}
-              layoutProvider={layoutProvider}
-              ads={adsToShow}
-              title={title}
+                         rowRenderer={rowRenderer}
+                         layoutProvider={layoutProvider}
+                         ads={adsToShow}
+                         title={title}
           />
-
       );
   }
 }
@@ -48,7 +47,6 @@ function mapStateToProps(state) {
         settingsFilters: state.settings.filters,
         ads: (state.ads[state.model.currentPage] || {}).results || [],
         currentAdsFilters: state.model.adsFilters,
-
     };
 }
 

@@ -47,8 +47,8 @@ export default class AdScreen extends React.PureComponent {
 
                     {versions.length > 0 &&
                         <React.Fragment>
-                            <H3>История изменений цены</H3>
-                            <Text>{versions.join(" -- ")} -- ${price}</Text>
+                            <H3 style={{padding: 16}}>История изменений цены</H3>
+                            <Text style={{padding: 16}}>{versions.join(" -- ")} -- ${price}</Text>
                         </React.Fragment>
                     }
                     {other_ads.length > 0 && <Text style={{padding: 16}}>У этого продавца еще {other_ads.length} других объявлений</Text>}

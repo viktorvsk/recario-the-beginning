@@ -9,6 +9,7 @@ import SearchContainer from "../components/containers/SearchContainer";
 import ModelContainer from "../components/containers/ModelContainer";
 import AdContainer from "../components/containers/AdContainer";
 import SearchModelContainer from "../components/containers/SearchModelContainer";
+import SettingsContainer from "../components/containers/SettingsContainer";
 
 import TabBarIcon from "../components/TabBarIcon";
 
@@ -44,7 +45,22 @@ ModelStack.navigationOptions = {
     ),
 };
 
+const SettingsStack = createStackNavigator({
+    Settings: SettingsContainer
+});
+
+SettingsStack.navigationOptions = {
+    tabBarLabel: "Настройки",
+    tabBarIcon: ({ focused }) => (
+        <TabBarIcon
+            focused={focused}
+            name={Platform.OS === "ios" ? "ios-settings" : "md-settings"}
+        />
+    ),
+};
+
 export default createBottomTabNavigator({
     SearchStack,
-    ModelStack
+    ModelStack,
+    SettingsStack
 });

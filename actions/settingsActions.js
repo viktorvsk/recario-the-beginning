@@ -14,8 +14,8 @@ export function fetchSettings() {
     };
 }
 
-export function setAdsSource(value) {
+export function setAdsSource(adsSourceId) {
     return function(dispatch) {
-        return dispatch({type: ActionTypes.SET_ADS_SOURCE, id: value.value});
+        return dispatch({type: ActionTypes.SET_ADS_SOURCE, id: adsSourceId});
     };
 }

@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {View, Text, Title} from "native-base";
 import {RecyclerListView} from "recyclerlistview";
+import {DataProvider, LayoutProvider} from "recyclerlistview";
 
 export default class AdsListScreen extends React.PureComponent {
     render () {
@@ -18,3 +20,11 @@ export default class AdsListScreen extends React.PureComponent {
         );
     }
 }
+
+AdsListScreen.propTypes = {
+    ads: PropTypes.array.isRequired,
+    layoutProvider: PropTypes.instanceOf(LayoutProvider).isRequired,
+    dataProvider: PropTypes.instanceOf(DataProvider).isRequired,
+    rowRenderer: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired
+};

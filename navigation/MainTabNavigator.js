@@ -1,15 +1,16 @@
+/* eslint-disable */
 import React from "react";
-import { Platform } from "react-native";
-import { createStackNavigator, createBottomTabNavigator } from "react-navigation";
+import {Platform } from "react-native";
+import {createStackNavigator, createBottomTabNavigator} from "react-navigation";
 
-import TabBarIcon from "../components/TabBarIcon";
 import FiltersContainer from "../components/containers/FiltersContainer";
+import AdsListContainer from "../components/containers/AdsListContainer";
 import SearchContainer from "../components/containers/SearchContainer";
 import ModelContainer from "../components/containers/ModelContainer";
 import AdContainer from "../components/containers/AdContainer";
-import AdsListContainer from "../components/containers/AdsListContainer";
 import SearchModelContainer from "../components/containers/SearchModelContainer";
 
+import TabBarIcon from "../components/TabBarIcon";
 
 const SearchStack = createStackNavigator({
     Filters: FiltersContainer,

@@ -1,17 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {Image, TouchableHighlight} from "react-native";
 import {Card, CardItem, Text, Col, Grid, Left, Right} from "native-base";
+
 import {mapTitleById} from "../Utils";
 
 export default class AdCar extends React.PureComponent {
     render () {
-        const {id, is_owner, car_gear_type_id, car_fuel_type_id, car_wheels_type_id, car_carcass_type_id, region, color, price, race, car_model_id, engine_capacity, images } = this.props.ad;
+        const {is_owner, car_gear_type_id, car_fuel_type_id, car_wheels_type_id, region, price, engine_capacity, images} = this.props.ad;
         const {onPress} = this.props;
-        const { gear_types, fuel_types, wheels_types, carcass_types } = this.props.filters;
+        const {gear_types, fuel_types, wheels_types} = this.props.filters;
         const gearType = mapTitleById(gear_types, car_gear_type_id);
         const fuelType = mapTitleById(fuel_types, car_fuel_type_id);
         const wheelsType = mapTitleById(wheels_types, car_wheels_type_id);
-        const carcassType = mapTitleById(carcass_types, car_carcass_type_id);
         const fuelString = engine_capacity ? `${fuelType} (${(engine_capacity / 1000).toFixed(1)} л.)` : fuelType;
 
         return(
@@ -39,3 +40,23 @@ export default class AdCar extends React.PureComponent {
         );
     }
 }
+
+AdCar.propTypes = {
+    onPress: PropTypes.func.isRequired,
+    filters: PropTypes.shape({
+        gear_types: PropTypes.array.isRequired,
+        fuel_types: PropTypes.array.isRequired,
+        wheels_types: PropTypes.array.isRequired,
+        carcass_types: PropTypes.array.isRequired
+    }),
+    ad: PropTypes.shape({
+        is_owner: PropTypes.bool.isRequired,
+        car_gear_type_id: PropTypes.number,
+        car_fuel_type_id: PropTypes.number,
+        car_wheels_type_id: PropTypes.number,
+        region: PropTypes.string,
+        price: PropTypes.number.isRequired,
+        engine_capacity: PropTypes.number,
+        images: PropTypes.array.isRequired
+    })
+};

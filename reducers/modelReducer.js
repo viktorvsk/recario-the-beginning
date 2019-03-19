@@ -2,6 +2,7 @@ import * as ActionTypes from "../actions/actionTypes";
 
 const initialState = {
     years: [],
+    isLoading: true,
     adsFilters: {
         gearType: "",
         fuelType: "",

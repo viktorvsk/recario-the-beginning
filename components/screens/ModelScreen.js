@@ -1,16 +1,14 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {Image} from "react-native";
-import {Button, Container, Content, Spinner, Text, Title, Picker, Item, View, Header, Form} from "native-base";
-
-
+import {Button, Container, Content, Spinner, Text, Title, Picker, Item, View, Form} from "native-base";
 
 import {filterAds} from "../../Utils";
-
 
 export default class ModelScreen extends React.PureComponent {
 
     render () {
-        const {nav, currentModelId, title, currentYear, adsLoading, modelLoading, years, ads, onChange, onFilter, currentAdsFilters, filters, preview, settingsFilters} = this.props;
+        const {nav, currentModelId, title, currentYear, adsLoading, years, ads, onChange, onFilter, currentAdsFilters, preview, settingsFilters} = this.props;
         const currentYearRow = years.filter(row => row.year === currentYear)[0];
         const onPress = () => nav.push("AdsList");
         const cities =  ads.filter((value, index, self) => self.map(x => x.region).indexOf(value.region) === index)
@@ -19,7 +17,6 @@ export default class ModelScreen extends React.PureComponent {
 
         const adsToShow = filterAds(ads, currentAdsFilters);
 
-        if (modelLoading) { return <Spinner />; }
         return(
 
             <Container padder>
@@ -121,3 +118,18 @@ export default class ModelScreen extends React.PureComponent {
         );
     }
 }
+
+ModelScreen.propTypes = {
+    nav: PropTypes.object.isRequired,
+    currentModelId: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    currentYear: PropTypes.number,
+    adsLoading: PropTypes.bool.isRequired,
+    years: PropTypes.array.isRequired,
+    ads: PropTypes.array.isRequired,
+    onChange: PropTypes.func.isRequired,
+    onFilter: PropTypes.func.isRequired,
+    currentAdsFilters: PropTypes.object.isRequired,
+    preview: PropTypes.string.isRequired,
+    settingsFilters: PropTypes.object.isRequired
+};

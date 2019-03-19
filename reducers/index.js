@@ -1,4 +1,4 @@
-import { combineReducers } from "redux";
+import {combineReducers} from "redux";
 import settingsReducer from "./settingsReducer";
 import adsReducer from "./adsReducer";
 import modelReducer from "./modelReducer";

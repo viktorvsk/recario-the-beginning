@@ -1,5 +1,7 @@
 import React from "react";
-import { Container, Content, Spinner } from "native-base";
+import PropTypes from "prop-types";
+import {Container, Content, Spinner} from "native-base";
+
 import FiltersBar from "../FiltersBar";
 import MakerModelsTabs from "../MakerModelsTabs";
 
@@ -24,3 +26,13 @@ export default class SearchScreen extends React.PureComponent {
         );
     }
 }
+
+SearchScreen.propTypes = {
+    nav: PropTypes.object.isRequired,
+    filters: PropTypes.object.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    onChange: PropTypes.fuc.isRequired,
+    cars: PropTypes.array.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    settings: PropTypes.object.isRequired
+};

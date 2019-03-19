@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {List, ListItem, Left, Right, Text, Icon} from "native-base";
 
 export default class SuggestionsModelsList extends React.PureComponent {
@@ -19,3 +20,8 @@ export default class SuggestionsModelsList extends React.PureComponent {
         );
     }
 }
+
+SuggestionsModelsList.propTypes = {
+    onPress: PropTypes.func.isRequired,
+    suggestions: PropTypes.array.isRequired
+};

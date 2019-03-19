@@ -1,7 +1,7 @@
 import React from "react";
-import { Button, Text, Form, Item, Label, Picker, Icon } from "native-base";
-import { NavigationActions } from "react-navigation";
-import { Dimensions, View } from "react-native";
+import PropTypes from "prop-types";
+import {Button, Text, Form, Item, Picker} from "native-base";
+import {Dimensions, View} from "react-native";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
 
 export default class FiltersBar extends React.PureComponent {
@@ -11,9 +11,6 @@ export default class FiltersBar extends React.PureComponent {
         const sliderLength = Dimensions.get("window").width - 60;
         const onPriceChange = values => {onChange("q[price_min]", values[0]); onChange("q[price_max]", values[1]);};
         const onYearChange = values => {onChange("q[year_min]", values[0]); onChange("q[year_max]", values[1]);};
-        const onRaceChange = values => {onChange("q[race_min]", values[0]); onChange("q[race_max]", values[1]);};
-        const onAdsCountChange = values => {onChange("q[ads_count]", values[0]);};
-
         const onGearChange = value => onChange("q[gear_type_id]", value);
         const onFuelChange = value => onChange("q[fuel_type_id]", value);
         const onWheelsChange = value => onChange("q[wheels_type_id]", value);
@@ -135,3 +132,11 @@ export default class FiltersBar extends React.PureComponent {
         );
     }
 }
+
+FiltersBar.propTypes = {
+    filters: PropTypes.object.isRequired,
+    settings: PropTypes.object.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    nav: PropTypes.object.isRequired
+};

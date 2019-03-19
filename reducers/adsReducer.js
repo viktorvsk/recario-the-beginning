@@ -1,6 +1,6 @@
 import * as ActionTypes from "../actions/actionTypes";
 
-const initialState = { currentAd: { images: [], versions: [] } };
+const initialState = { currentAd: { images: [], versions: [] }, isLoading: false };
 
 export default function adsReducer(state = initialState, action = {}) {
     switch (action.type) {

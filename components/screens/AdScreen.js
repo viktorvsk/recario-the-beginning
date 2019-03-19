@@ -1,32 +1,22 @@
 import React from "react";
-import { Dimensions, Image } from "react-native";
+import PropTypes from "prop-types";
+import {Container, Content, Text, Title, H3, List, ListItem, Left, Right} from "native-base";
 import Gallery from "react-native-image-gallery";
-import { RecyclerListView, DataProvider, LayoutProvider } from "recyclerlistview";
-import {Container, Content, Spinner, Text, Title, Picker, Form, Item, View, H1, H3, List, ListItem, Left, Right, Header} from "native-base";
-
-import AdCar from "../AdCar";
 
 import {mapTitleById} from "../../Utils";
-
 
 export default class AdScreen extends React.PureComponent {
 
     render () {
-        const {ad, isLoading} = this.props;
-
         const {other_ads, car_gear_type_id, car_fuel_type_id, car_wheels_type_id, car_carcass_type_id, url, description, title, region, color, year, price, race, engine_capacity, images, versions} = this.props.ad;
-
-        const {filters} = this.props;
-        const {gear_types, fuel_types, wheels_types, carcass_types} = filters;
+        const {gear_types, fuel_types, wheels_types, carcass_types} = this.props.filters;
         const gearType = mapTitleById(gear_types, car_gear_type_id);
         const fuelType = mapTitleById(fuel_types, car_fuel_type_id);
         const wheelsType = mapTitleById(wheels_types, car_wheels_type_id);
         const carcassType = mapTitleById(carcass_types, car_carcass_type_id);
-        const imageItems = images.map((image) => { return { original: image, thumbnail: image }; });
         const fuelString = engine_capacity ? `${fuelType} (${(engine_capacity / 1000).toFixed(1)} л.)` : fuelType;
         const imagesURLs = images.map(image => { return {source: {uri: image}}; });
 
-        if (isLoading) { return <Spinner />; }
         return(
 
             <Container>
@@ -58,7 +48,7 @@ export default class AdScreen extends React.PureComponent {
                     {versions.length > 0 &&
                         <React.Fragment>
                             <H3>История изменений цены</H3>
-                            <Text>{versions.join(" -> ")} -> ${price}</Text>
+                            <Text>{versions.join(" -- ")} -- ${price}</Text>
                         </React.Fragment>
                     }
                     {other_ads.length > 0 && <Text style={{padding: 16}}>У этого продавца еще {other_ads.length} других объявлений</Text>}
@@ -69,3 +59,25 @@ export default class AdScreen extends React.PureComponent {
         );
     }
 }
+
+AdScreen.propTypes = {
+    filters: PropTypes.object.isRequired,
+    ad: PropTypes.shape({
+        other_ads: PropTypes.array,
+        car_gear_type_id: PropTypes.number,
+        car_fuel_type_id: PropTypes.number,
+        car_wheels_type_id: PropTypes.number,
+        car_carcass_type_id: PropTypes.number,
+        url: PropTypes.string.isRequired,
+        description: PropTypes.string,
+        title: PropTypes.string.isRequired,
+        region: PropTypes.string,
+        color: PropTypes.string,
+        year: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        race: PropTypes.number.isRequired,
+        engine_capacity: PropTypes.number,
+        images: PropTypes.array.isRequired,
+        versions: PropTypes.array.isRequired
+    })
+};

@@ -41,14 +41,16 @@ export default class ModelScreen extends React.PureComponent {
 
                     <Image style={{ height: 300, flex: 1 }} source={{uri: preview}} />
 
-                    {years.length > 0 && currentYear &&
+                    {years.length > 0 && currentYear && !adsLoading &&
                         <Content padder>
                             <Text>Цены начинаются от ${currentYearRow.min_price} и самый дорогой вариант - ${currentYearRow.max_price}.</Text>
                             <Text>Средняя цена - ${Math.round(currentYearRow.average_price)} среди {currentYearRow.ads_count} предложений.</Text>
                         </Content>
                     }
 
-                    {ads.length > 0 &&
+                    {adsLoading && <Spinner />}
+
+                    {ads.length > 0 && !adsLoading &&
                         <Form>
                             <Item picker style={{paddingLeft: 15}} >
                                 <Text style={{width: "50%"}}>Тип КПП</Text>

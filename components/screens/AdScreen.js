@@ -34,10 +34,10 @@ export default class AdScreen extends React.PureComponent {
                     <Title>{title} {year}</Title>
                     <Title style={{color: "#3498db", fontSize: 18, padding: 10}}>${price}</Title>
 
-                    <Gallery
+                    {imagesURLs.length > 0 && <Gallery
                         style={{ flex: 1, backgroundColor: "#fff", padding: 0, margin: 0, height: 300 }}
                         images={imagesURLs}
-                    />
+                    />}
 
                     <List>
                         {gearType && <ListItem><Left><Text>Коробка</Text></Left><Right style={{minWidth: 100}}><Text>{gearType}</Text></Right></ListItem>}
@@ -51,8 +51,17 @@ export default class AdScreen extends React.PureComponent {
 
 
 
+
                     <Text style={{padding: 16}}>{description || "Описание отсутствует"}</Text>
                     <Text style={{padding: 16}}>Источник: {url}</Text>
+
+                    {versions.length > 0 &&
+                        <React.Fragment>
+                            <H3>История изменений цены</H3>
+                            <Text>{versions.join(" -> ")} -> ${price}</Text>
+                        </React.Fragment>
+                    }
+                    {other_ads.length > 0 && <Text style={{padding: 16}}>У этого продавца еще {other_ads.length} других объявлений</Text>}
                 </Content>
             </Container>
 

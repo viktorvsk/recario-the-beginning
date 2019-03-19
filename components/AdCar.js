@@ -1,6 +1,6 @@
 import React from "react";
 import {Image, TouchableHighlight} from "react-native";
-import {Card, CardItem, Text, Col, Grid} from "native-base";
+import {Card, CardItem, Text, Col, Grid, Left, Right} from "native-base";
 import {mapTitleById} from "../Utils";
 
 export default class AdCar extends React.PureComponent {
@@ -20,7 +20,8 @@ export default class AdCar extends React.PureComponent {
                     <TouchableHighlight onPress={onPress} style={{ height: 300, flex: 1 }}><Image style={{ height: 300, flex: 1 }} source={{uri: images[0]}}/></TouchableHighlight>
                 </CardItem>
                 <CardItem style={{height: 40}}>
-                    <Text style={{color: "#3498db", fontSize: 18}}>$ {price}</Text>
+                    <Left><Text style={{color: "#3498db", fontSize: 18}}>$ {price}</Text></Left>
+                    {!is_owner && <Right><Text style={{color: "#db9834", fontSize: 18}}>(Посредник)</Text></Right>}
                 </CardItem>
                 <CardItem style={{height: 36}}>
                     <Grid>

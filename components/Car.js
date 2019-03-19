@@ -1,5 +1,5 @@
 import React from "react";
-import {Image} from "react-native";
+import {Image, TouchableHighlight} from "react-native";
 import {Card, CardItem, Text, Grid, Col} from "native-base";
 import {NavigationActions} from "react-navigation";
 
@@ -17,7 +17,7 @@ export default class Car extends React.PureComponent {
                     <Text>{maker} - {model} ({ads_count})</Text>
                 </CardItem>
                 <CardItem style={{height: 300}} cardBody>
-                    <Image style={{ height: 300, flex: 1 }} source={{uri: modelImages[model_id]}} />
+                    <TouchableHighlight style={{flex: 1}} onPress={onPress}><Image style={{flex: 1}} source={{uri: modelImages[model_id]}} /></TouchableHighlight>
                 </CardItem>
                 <CardItem style={{height: 50}} bordered>
                     <Grid>

@@ -8,6 +8,7 @@ const initialState = {
         gear_types: []
     },
     model_images: {},
+    isLoading: true,
     adsSources: [{ title: "", id: 1, selected: true}]
 };
 

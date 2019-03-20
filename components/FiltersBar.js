@@ -33,13 +33,13 @@ export default class FiltersBar extends React.PureComponent {
                         </View>
                         <View style={{ justifyContent: "center", flexDirection: "row", width: "100%" }}>
                             <MultiSlider values={[filters["q[price_min]"], filters["q[price_max]"]]}
-                                         sliderLength={sliderLength}
-                                         onValuesChange={onPriceChange}
-                                         min={0}
-                                         max={100000}
-                                         step={500}
-                                         allowOverlap
-                                         snapped
+                                sliderLength={sliderLength}
+                                onValuesChange={onPriceChange}
+                                min={0}
+                                max={100000}
+                                step={500}
+                                allowOverlap
+                                snapped
                             />
                         </View>
                     </View>
@@ -52,13 +52,13 @@ export default class FiltersBar extends React.PureComponent {
                         </View>
                         <View style={{ justifyContent: "center", flexDirection: "row", width: "100%" }}>
                             <MultiSlider values={[filters["q[year_min]"], filters["q[year_max]"]]}
-                                         sliderLength={sliderLength}
-                                         onValuesChange={onYearChange}
-                                         min={1980}
-                                         max={2019}
-                                         step={1}
-                                         allowOverlap
-                                         snapped
+                                sliderLength={sliderLength}
+                                onValuesChange={onYearChange}
+                                min={1980}
+                                max={2019}
+                                step={1}
+                                allowOverlap
+                                snapped
                             />
                         </View>
                     </View>
@@ -67,11 +67,11 @@ export default class FiltersBar extends React.PureComponent {
                 <Item picker style={{paddingLeft: 15}}>
                     <Text style={{width: "50%"}}>КПП</Text>
                     <Picker mode="dropdown"
-                            iosHeader="Выберите КПП"
-                            headerBackButtonText="Назад"
-                            placeholder="Любая"
-                            selectedValue={filters["q[gear_type_id]"]}
-                            onValueChange={onGearChange}
+                        iosHeader="Выберите КПП"
+                        headerBackButtonText="Назад"
+                        placeholder="Любая"
+                        selectedValue={filters["q[gear_type_id]"]}
+                        onValueChange={onGearChange}
                     >
                         <Picker.Item value="" label="Любая"/>
                         {settings.filters.gear_types.map(option => pickerGenerator(option))}
@@ -80,11 +80,11 @@ export default class FiltersBar extends React.PureComponent {
                 <Item picker style={{paddingLeft: 15}}>
                     <Text style={{width: "50%"}}>Тип топлива</Text>
                     <Picker mode="dropdown"
-                            iosHeader="Выберите тип топлива"
-                            headerBackButtonText="Назад"
-                            placeholder="Любое"
-                            selectedValue={filters["q[fuel_type_id]"]}
-                            onValueChange={onFuelChange}
+                        iosHeader="Выберите тип топлива"
+                        headerBackButtonText="Назад"
+                        placeholder="Любое"
+                        selectedValue={filters["q[fuel_type_id]"]}
+                        onValueChange={onFuelChange}
                     >
                         <Picker.Item value="" label="Любое"/>
                         {settings.filters.fuel_types.map(option => pickerGenerator(option))}
@@ -93,11 +93,11 @@ export default class FiltersBar extends React.PureComponent {
                 <Item picker style={{paddingLeft: 15}}>
                     <Text style={{width: "50%"}}>Тип привода</Text>
                     <Picker mode="dropdown"
-                            iosHeader="Выберите привод"
-                            headerBackButtonText="Назад"
-                            placeholder="Любой"
-                            selectedValue={filters["q[wheels_type_id]"]}
-                            onValueChange={onWheelsChange}
+                        iosHeader="Выберите привод"
+                        headerBackButtonText="Назад"
+                        placeholder="Любой"
+                        selectedValue={filters["q[wheels_type_id]"]}
+                        onValueChange={onWheelsChange}
                     >
                         <Picker.Item value="" label="Любой"/>
                         {settings.filters.wheels_types.map(option => pickerGenerator(option))}
@@ -106,11 +106,11 @@ export default class FiltersBar extends React.PureComponent {
                 <Item picker style={{paddingLeft: 15}}>
                     <Text style={{width: "50%"}}>Тип кузова</Text>
                     <Picker mode="dropdown"
-                            iosHeader="Выберите кузов"
-                            headerBackButtonText="Назад"
-                            placeholder="Любой"
-                            selectedValue={filters["q[carcass_type_id]"]}
-                            onValueChange={onCarcassChange}
+                        iosHeader="Выберите кузов"
+                        headerBackButtonText="Назад"
+                        placeholder="Любой"
+                        selectedValue={filters["q[carcass_type_id]"]}
+                        onValueChange={onCarcassChange}
                     >
                         <Picker.Item value="" label="Любой"/>
                         {settings.filters.carcass_types.map(option => pickerGenerator(option))}

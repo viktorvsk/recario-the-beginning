@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 
 import {changeFilters} from "../../actions/changeFiltersActions";
 import {performSearch} from "../../actions/searchActions";
-import {fetchSettings} from "../../actions/settingsActions";
 
 import MakerModelsTabs from "../MakerModelsTabs";
 
@@ -15,22 +14,18 @@ class SearchContainer extends React.PureComponent {
       headerBackTitle: "Модели"
   }
 
-  componentDidMount() {
-      this.props.fetchSettings();
-  }
-
   render() {
       const {navigation, settings, carModels, isLoading, filters, onChange, onSelectChange, onSubmit} = this.props;
 
       return (
           <MakerModelsTabs settings={settings}
-                           carModels={carModels}
-                           isLoading={isLoading}
-                           filters={filters}
-                           onChange={onChange}
-                           onSelectChange={onSelectChange}
-                           onSubmit={onSubmit}
-                           nav={navigation}
+              carModels={carModels}
+              isLoading={isLoading}
+              filters={filters}
+              onChange={onChange}
+              onSelectChange={onSelectChange}
+              onSubmit={onSubmit}
+              nav={navigation}
           />
 
       );
@@ -50,8 +45,7 @@ function mapDispatchToProps(dispatch) {
     return {
         onChange: (fType, fValue) => dispatch(changeFilters(fType, fValue)),
         onSelectChange: (fType, fValue) => dispatch(changeFilters(fType, fValue)),
-        onSubmit: () => dispatch(performSearch()),
-        fetchSettings: () => dispatch(fetchSettings())
+        onSubmit: () => dispatch(performSearch())
     };
 }
 
@@ -65,6 +59,5 @@ SearchContainer.propTypes = {
     filters: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     onSelectChange: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    fetchSettings: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired
 };

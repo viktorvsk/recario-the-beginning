@@ -32,10 +32,10 @@ class AdsListContainer extends React.PureComponent {
 
       return(
           <AdsListScreen dataProvider={dataProvider}
-                         rowRenderer={rowRenderer}
-                         layoutProvider={layoutProvider}
-                         ads={adsToShow}
-                         title={title}
+              rowRenderer={rowRenderer}
+              layoutProvider={layoutProvider}
+              ads={adsToShow}
+              title={title}
           />
       );
   }

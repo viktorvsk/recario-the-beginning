@@ -10,11 +10,11 @@ export default class SettingsScreen extends React.PureComponent {
             <React.Fragment>
                 <Text style={{paddingLeft: 16}}>Выберите источник объявлений</Text>
                 <Picker mode="dropdown"
-                        iosHeader="Выберите источник"
-                        headerBackButtonText="Назад"
-                        placeholder="Источник объявлений"
-                        selectedValue={currentAdsSourceId}
-                        onValueChange={setAdsSource}
+                    iosHeader="Выберите источник"
+                    headerBackButtonText="Назад"
+                    placeholder="Источник объявлений"
+                    selectedValue={currentAdsSourceId}
+                    onValueChange={setAdsSource}
                 >
                     {adsSources.map(source => <Picker.Item value={source.id} key={source.id} label={source.title}/>)}
                 </Picker>

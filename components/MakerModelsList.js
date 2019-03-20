@@ -20,8 +20,8 @@ export default class MakerModelsList extends React.Component {
             }
         );
         return <RecyclerListView layoutProvider={layoutProvider}
-                                 dataProvider={dataProvider.cloneWithRows(models)}
-                                 rowRenderer={rowRenderer} />;
+            dataProvider={dataProvider.cloneWithRows(models)}
+            rowRenderer={rowRenderer} />;
     }
 }
 

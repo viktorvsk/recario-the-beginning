@@ -5,7 +5,6 @@ import {Container, Content} from "native-base";
 
 import {changeFilters} from "../../actions/changeFiltersActions";
 import {performSearch} from "../../actions/searchActions";
-import {fetchSettings} from "../../actions/settingsActions";
 
 import FiltersBar from "../FiltersBar";
 
@@ -15,10 +14,6 @@ class FiltersContainer extends React.PureComponent {
       headerBackTitle: "Фильтр"
   }
 
-  componentDidMount() {
-      this.props.fetchSettings();
-  }
-
   render() {
       const {navigation, settings, filters, onChange, onSelectChange, onSubmit} = this.props;
 
@@ -26,11 +21,11 @@ class FiltersContainer extends React.PureComponent {
           <Container padder>
               <Content>
                   <FiltersBar settings={settings}
-                              filters={filters}
-                              onChange={onChange}
-                              onSelectChange={onSelectChange}
-                              onSubmit={onSubmit}
-                              nav={navigation}
+                      filters={filters}
+                      onChange={onChange}
+                      onSelectChange={onSelectChange}
+                      onSubmit={onSubmit}
+                      nav={navigation}
                   />
               </Content>
           </Container>
@@ -58,8 +53,7 @@ function mapDispatchToProps(dispatch) {
     return {
         onChange: (fType, fValue) => dispatch(changeFilters(fType, fValue)),
         onSelectChange: (fType, fValue) => dispatch(changeFilters(fType, fValue)),
-        onSubmit: () => dispatch(performSearch()),
-        fetchSettings: () => dispatch(fetchSettings())
+        onSubmit: () => dispatch(performSearch())
     };
 }
 
@@ -71,6 +65,5 @@ FiltersContainer.propTypes = {
     filters: PropTypes.object.isRequired,
     onChange: PropTypes.func.isRequired,
     onSelectChange: PropTypes.func.isRequired,
-    onSubmit: PropTypes.func.isRequired,
-    fetchSettings: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired
 };

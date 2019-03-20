@@ -14,8 +14,8 @@ export default class AdsListScreen extends React.PureComponent {
             <View style={{flex:1, width: "100%", height: 350}}>
                 <Title style={{padding: 10}}>{title}</Title>
                 <RecyclerListView layoutProvider={layoutProvider}
-                                  dataProvider={dataProvider.cloneWithRows(ads)}
-                                  rowRenderer={rowRenderer} />
+                    dataProvider={dataProvider.cloneWithRows(ads)}
+                    rowRenderer={rowRenderer} />
             </View>
         );
     }

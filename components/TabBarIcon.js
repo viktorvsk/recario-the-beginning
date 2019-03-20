@@ -8,9 +8,9 @@ export default class TabBarIcon extends React.PureComponent {
 
         return (
             <Icon.Ionicons name={name}
-                           size={26}
-                           style={{marginBottom: -3}}
-                           color={focused ? "blue" : "grey"}
+                size={26}
+                style={{marginBottom: -3}}
+                color={focused ? "blue" : "grey"}
             />
         );
     }

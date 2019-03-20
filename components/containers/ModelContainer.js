@@ -36,18 +36,18 @@ class ModelContainer extends React.PureComponent {
 
       return(
           <ModelScreen title={title}
-                       currentModelId={currentModelId}
-                       currentYear={currentYear}
-                       adsLoading={adsLoading}
-                       years={years}
-                       ads={ads}
-                       onChange={onChange}
-                       onFilter={onFilter}
-                       currentAdsFilters={currentAdsFilters}
-                       filters={filters}
-                       preview={preview}
-                       settingsFilters={settingsFilters}
-                       nav={navigation}
+              currentModelId={currentModelId}
+              currentYear={currentYear}
+              adsLoading={adsLoading}
+              years={years}
+              ads={ads}
+              onChange={onChange}
+              onFilter={onFilter}
+              currentAdsFilters={currentAdsFilters}
+              filters={filters}
+              preview={preview}
+              settingsFilters={settingsFilters}
+              nav={navigation}
           />
 
       );

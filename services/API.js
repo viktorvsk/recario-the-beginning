@@ -5,7 +5,7 @@ let baseURL = "";
 if (process.env.NODE_ENV === "production") {
     baseURL = "http://api.recar.io/api/v1";
 } else {
-    baseURL = "http://192.168.0.102:3000/api/v1";
+    baseURL = "http://192.168.0.104:3000/api/v1";
 }
 
 
@@ -39,5 +39,17 @@ export default class API {
 
     static getAd(id) {
         return apiService.get(`/ads/${id}`);
+    }
+
+    static signIn(phone, pass) {
+        return apiService.put("/sessions", {phone_number: phone, password: pass});
+    }
+
+    static updateContacts(contacts, access_token) {
+        return apiService.put("/contacts", {contacts: contacts, access_token: access_token});
+    }
+
+    static getContacts(access_token) {
+        return apiService.get(`/contacts?access_token=${access_token}`);
     }
 }

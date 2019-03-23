@@ -16,7 +16,7 @@ class SettingsContainer extends React.PureComponent {
       const {adsSources, setAdsSource, currentAdsSourceId} = this.props;
 
       return(
-          <SettingsScreen adsSources={adsSources} setAdsSource={setAdsSource} currentAdsSourceId={currentAdsSourceId} />
+          <SettingsScreen adsSources={adsSources} setAdsSource={setAdsSource} currentAdsSourceId={currentAdsSourceId}/>
       );
   }
 }

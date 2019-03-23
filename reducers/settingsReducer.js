@@ -9,7 +9,8 @@ const initialState = {
     },
     model_images: {},
     isLoading: true,
-    adsSources: [{ title: "", id: 1, selected: true}]
+    adsSources: [{ title: "", id: 1, selected: true}],
+    accessToken: "LEzisJKD15dCtW1F21uP"
 };
 
 export default function settingsReducer(state = initialState, action = {}) {
@@ -44,6 +45,11 @@ export default function settingsReducer(state = initialState, action = {}) {
                 };
             })
 
+        };
+    case ActionTypes.SIGN_IN_SUCCESS:
+        return {
+            ...state,
+            accessToken: action.token
         };
     default:
         return state;

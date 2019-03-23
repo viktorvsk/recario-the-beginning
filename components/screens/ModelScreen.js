@@ -9,6 +9,7 @@ export default class ModelScreen extends React.PureComponent {
 
     render () {
         const {nav, currentModelId, title, currentYear, adsLoading, years, ads, onChange, onFilter, currentAdsFilters, preview, settingsFilters} = this.props;
+
         const currentYearRow = years.filter(row => row.year === currentYear)[0];
         const onPress = () => nav.push("AdsList");
         const cities =  ads.filter((value, index, self) => self.map(x => x.region).indexOf(value.region) === index)

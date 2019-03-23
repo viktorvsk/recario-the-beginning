@@ -4,6 +4,7 @@ import adsReducer from "./adsReducer";
 import modelReducer from "./modelReducer";
 import autocompleteReducer from "./autocompleteReducer";
 import searchReducer from "./searchReducer";
+import contactsReducer from "./contactsReducer";
 import errorReducer from "./errorReducer";
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
     autocomplete: autocompleteReducer,
     model: modelReducer,
     ads: adsReducer,
+    contacts: contactsReducer,
     error: errorReducer
 });
 

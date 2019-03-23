@@ -8,6 +8,7 @@ import {mapTitleById} from "../Utils";
 export default class AdCar extends React.PureComponent {
     render () {
         const {is_owner, car_gear_type_id, car_fuel_type_id, car_wheels_type_id, region, price, engine_capacity, images} = this.props.ad;
+
         const {onPress} = this.props;
         const {gear_types, fuel_types, wheels_types} = this.props.filters;
         const gearType = mapTitleById(gear_types, car_gear_type_id);
@@ -50,7 +51,7 @@ AdCar.propTypes = {
         carcass_types: PropTypes.array.isRequired
     }),
     ad: PropTypes.shape({
-        is_owner: PropTypes.bool.isRequired,
+        is_owner: PropTypes.bool,
         car_gear_type_id: PropTypes.number,
         car_fuel_type_id: PropTypes.number,
         car_wheels_type_id: PropTypes.number,

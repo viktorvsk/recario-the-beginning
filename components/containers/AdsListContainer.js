@@ -43,9 +43,9 @@ class AdsListContainer extends React.PureComponent {
 
 function mapStateToProps(state) {
     return {
-        title: `${state.model.title} ${(state.ads[state.model.currentPage] || {}).currentYear}`,
+        title: `${state.model.title} ${state.ads.currentYear}`,
         settingsFilters: state.settings.filters,
-        ads: (state.ads[state.model.currentPage] || {}).results || [],
+        ads: state.ads.ads,
         currentAdsFilters: state.model.adsFilters,
     };
 }

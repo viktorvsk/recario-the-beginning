@@ -63,10 +63,10 @@ function mapStateToProps(state) {
         currentModelId: currentModelId,
         preview: state.settings.model_images[currentModelId] || "https://example.com/image-preview.jpg",
         settingsFilters: state.settings.filters,
-        ads: (state.ads[currentModelId] || {}).results || [],
+        ads: state.ads.ads,
         adsLoading: state.ads.isLoading,
         isLoading: state.model.isLoading,
-        currentYear: (state.ads[currentModelId] || {}).currentYear,
+        currentYear: state.ads.currentYear,
         currentAdsFilters: state.model.adsFilters,
         filters: state.settings.filters || {}
     };

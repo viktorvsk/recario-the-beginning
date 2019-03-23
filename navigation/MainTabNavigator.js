@@ -10,6 +10,8 @@ import ModelContainer from "../components/containers/ModelContainer";
 import AdContainer from "../components/containers/AdContainer";
 import SearchModelContainer from "../components/containers/SearchModelContainer";
 import SettingsContainer from "../components/containers/SettingsContainer";
+import ContactsContainer from "../components/containers/ContactsContainer";
+import SessionsContainer from "../components/containers/SessionsContainer";
 
 import TabBarIcon from "../components/TabBarIcon";
 
@@ -44,8 +46,19 @@ SettingsStack.navigationOptions = {
     tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === "ios" ? "ios-settings" : "md-settings"}/>
 };
 
+const ContactsStack = createStackNavigator({
+    Contacts: ContactsContainer,
+    Sessions: SessionsContainer
+}, {initialRouteName: "Contacts"});
+
+ContactsStack.navigationOptions = {
+    tabBarLabel: "Друзья",
+    tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === "ios" ? "ios-contacts" : "md-contacts"}/>
+};
+
 export default createBottomTabNavigator({
     SearchStack,
     ModelStack,
+    ContactsStack,
     SettingsStack
 });

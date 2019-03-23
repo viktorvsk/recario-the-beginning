@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {Text, Picker} from "native-base";
 
+
 export default class SettingsScreen extends React.PureComponent {
     render () {
         const {adsSources, setAdsSource, currentAdsSourceId} = this.props;

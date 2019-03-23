@@ -1,14 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
+
 import {Spinner} from "native-base";
+
 import AppNavigator from "./navigation/AppNavigator";
+
 import {fetchSettings} from "./actions/settingsActions";
 
 class Root extends React.Component {
 
     componentWillMount () {
-        this.props.fetchSettings();
+        const {fetchSettings} = this.props;
+
+        fetchSettings();
     }
 
     render () {
@@ -18,7 +23,6 @@ class Root extends React.Component {
     }
 }
 
-
 function mapStateToProps(state) {
     return {
         isLoading: state.settings.isLoading
@@ -27,7 +31,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        fetchSettings: () => { dispatch(fetchSettings()); }
+        fetchSettings: () => dispatch(fetchSettings())
     };
 }
 

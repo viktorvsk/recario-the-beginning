@@ -3,6 +3,8 @@ import * as ActionTypes from "../actions/actionTypes";
 const initialState = { currentAd: { images: [], versions: [] }, isLoading: false };
 
 export default function adsReducer(state = initialState, action = {}) {
+    state.currentYear = undefined;
+    state.ads = [];
     switch (action.type) {
     // ModelPage
     case ActionTypes.GET_ADS_STARTED:
@@ -13,7 +15,8 @@ export default function adsReducer(state = initialState, action = {}) {
     case ActionTypes.GET_ADS_SUCCESS:
         return {
             ...state,
-            [action.id]: { results: action.ads, currentYear: action.year },
+            currentYear: action.year,
+            ads: action.ads,
             isLoading: false
         };
     case ActionTypes.GET_ADS_FAILED:

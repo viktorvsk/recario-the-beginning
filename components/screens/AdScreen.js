@@ -48,7 +48,7 @@ export default class AdScreen extends React.PureComponent {
                             <Text style={{padding: 16}}>{versions.join(" -- ")} -- ${price}</Text>
                         </React.Fragment>
                     }
-                    {other_ads.length > 0 && <Text style={{padding: 16}}>У этого продавца еще {other_ads.length} других объявлений</Text>}
+                    {other_ads && other_ads.length > 0 && <Text style={{padding: 16}}>У этого продавца еще {other_ads.length} других объявлений</Text>}
                 </Content>
             </Container>
 

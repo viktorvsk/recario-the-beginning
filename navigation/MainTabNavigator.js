@@ -11,7 +11,6 @@ import AdContainer from "../components/containers/AdContainer";
 import SearchModelContainer from "../components/containers/SearchModelContainer";
 import SettingsContainer from "../components/containers/SettingsContainer";
 import ContactsContainer from "../components/containers/ContactsContainer";
-import SessionsContainer from "../components/containers/SessionsContainer";
 
 import TabBarIcon from "../components/TabBarIcon";
 
@@ -47,9 +46,8 @@ SettingsStack.navigationOptions = {
 };
 
 const ContactsStack = createStackNavigator({
-    Contacts: ContactsContainer,
-    Sessions: SessionsContainer
-}, {initialRouteName: "Contacts"});
+    Contacts: ContactsContainer
+});
 
 ContactsStack.navigationOptions = {
     tabBarLabel: "Друзья",

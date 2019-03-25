@@ -5,7 +5,7 @@ let baseURL = "";
 if (process.env.NODE_ENV === "production") {
     baseURL = "http://api.recar.io/api/v1";
 } else {
-    baseURL = "http://192.168.0.104:3000/api/v1";
+    baseURL = "http://192.168.0.102:3000/api/v1";
 }
 
 
@@ -43,6 +43,10 @@ export default class API {
 
     static signIn(phone, pass) {
         return apiService.put("/sessions", {phone_number: phone, password: pass});
+    }
+
+    static signOut(access_token) {
+        return apiService.delete("/sessions", {access_token: access_token});
     }
 
     static updateContacts(contacts, access_token) {

@@ -13,7 +13,7 @@ export default class Login extends React.Component {
     }
 
     onSubmit () {
-        this.props.onSignIn(this.state.phone, this.state.password, () => this.props.nav.navigate("Contacts"));
+        this.props.onSignIn(this.state.phone, this.state.password);
     }
 
     render () {
@@ -36,6 +36,5 @@ export default class Login extends React.Component {
 }
 
 Login.propTypes = {
-    onSignIn: PropTypes.func.isRequired,
-    nav: PropTypes.object.isRequired
+    onSignIn: PropTypes.func.isRequired
 };

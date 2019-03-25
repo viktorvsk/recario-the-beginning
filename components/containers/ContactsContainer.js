@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {DataProvider, LayoutProvider} from "recyclerlistview";
 import {Permissions, Contacts} from "expo";
-import {Text} from "native-base";
 import {Dimensions} from "react-native";
 
+
 import {updateContacts, getContacts} from "../../actions/contactsActions";
+import {showModal, hideModal, signIn} from "../../actions/sessionsActions";
 import {loadAd} from "../../actions/adsActions";
 
 import ContactsScreen from "../screens/ContactsScreen";
@@ -19,9 +20,19 @@ class ContactsContainer extends React.PureComponent {
       headerBackTitle: "Друзья"
   }
 
+  // componentDidMount() {
+  //   this._sub = this.props.navigation.addListener(
+  //     'didFocus',
+  //     () => { if (!this.props.token) { this.props.showModal() } }
+  //   );
+  // }
+
+  // componentWillUnmount() {
+  //   this._sub.remove();
+  // }
+
   render() {
-      const {token, navigation, postUpdatedContacts, getContacts, fAds, fofAds, isLoading, settingsFilters, loadAd} = this.props;
-      const onPress = () => navigation.push("Sessions");
+      const {signIn, showModal, hideModal, sessionModalVisible, token, navigation, postUpdatedContacts, getContacts, fAds, fofAds, isLoading, settingsFilters, loadAd} = this.props;
       const dataProvider = new DataProvider((r1, r2) => r1.key !== r2.key);
       const rowRenderer = (type, data) => <AdCar filters={settingsFilters} ad={data} nav={navigation} onPress={() => {
           loadAd(data.id);
@@ -35,13 +46,14 @@ class ContactsContainer extends React.PureComponent {
               dim.height = 470;
           }
       );
-
-      if (!token) {
-          return <Text onPress={onPress}>Войдите в систему, чтобы увидеть, кто из ваших друзей продает машину</Text>;
-      }
+      const onSignIn = async (phone, pass) => {
+          await signIn(phone, pass);
+          getContacts();
+      };
 
       return(
           <ContactsScreen postUpdatedContacts={postUpdatedContacts}
+              token={token}
               settingsFilters={settingsFilters}
               getContacts={getContacts}
               fAds={fAds}
@@ -50,7 +62,13 @@ class ContactsContainer extends React.PureComponent {
               rowRenderer={rowRenderer}
               layoutProvider={layoutProvider}
               dataProvider={dataProvider}
+              showModal={showModal}
+              hideModal={hideModal}
+              sessionModalVisible={sessionModalVisible}
+              onSignIn={onSignIn}
+              nav={navigation}
           />
+
       );
   }
 }
@@ -61,12 +79,16 @@ function mapStateToProps(state) {
         fAds: state.contacts.fAds,
         fofAds: state.contacts.fofAds,
         isLoading: state.contacts.isLoading,
-        settingsFilters: state.settings.filters
+        settingsFilters: state.settings.filters,
+        sessionModalVisible: state.settings.sessionModalVisible
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
+        showModal: () => dispatch(showModal()),
+        hideModal: () => dispatch(hideModal()),
+        signIn: (phone, pass) => dispatch(signIn(phone, pass)),
         getContacts: () => dispatch(getContacts()),
         loadAd: (id) => dispatch(loadAd(id)),
         postUpdatedContacts: async () => {
@@ -100,6 +122,10 @@ ContactsContainer.propTypes = {
     getContacts: PropTypes.func.isRequired,
     fofAds: PropTypes.array.isRequired,
     fAds: PropTypes.array.isRequired,
-    isLoading: PropTypes.bool.isRequired
+    isLoading: PropTypes.bool.isRequired,
+    showModal: PropTypes.func.isRequired,
+    hideModal: PropTypes.func.isRequired,
+    signIn: PropTypes.func.isRequired,
+    sessionModalVisible: PropTypes.bool.isRequired
 };
 

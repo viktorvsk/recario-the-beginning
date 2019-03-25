@@ -10,7 +10,8 @@ const initialState = {
     model_images: {},
     isLoading: true,
     adsSources: [{ title: "", id: 1, selected: true}],
-    accessToken: "LEzisJKD15dCtW1F21uP"
+    accessToken: undefined,
+    sessionModalVisible: false
 };
 
 export default function settingsReducer(state = initialState, action = {}) {
@@ -50,6 +51,22 @@ export default function settingsReducer(state = initialState, action = {}) {
         return {
             ...state,
             accessToken: action.token
+        };
+    case ActionTypes.SIGN_OUT_SUCCESS:
+        return {
+            ...state,
+            accessToken: undefined,
+            sessionModalVisible: false
+        };
+    case ActionTypes.SHOW_SESSION_MODAL:
+        return {
+            ...state,
+            sessionModalVisible: true
+        };
+    case ActionTypes.HIDE_SESSION_MODAL:
+        return {
+            ...state,
+            sessionModalVisible: false
         };
     default:
         return state;

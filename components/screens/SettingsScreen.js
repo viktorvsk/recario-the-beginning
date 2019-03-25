@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Text, Picker} from "native-base";
+import {Text, Picker, Button} from "native-base";
 
 
 export default class SettingsScreen extends React.PureComponent {
     render () {
-        const {adsSources, setAdsSource, currentAdsSourceId} = this.props;
+        const {adsSources, setAdsSource, currentAdsSourceId, onSignOut, token} = this.props;
 
         return(
             <React.Fragment>
@@ -19,6 +19,7 @@ export default class SettingsScreen extends React.PureComponent {
                 >
                     {adsSources.map(source => <Picker.Item value={source.id} key={source.id} label={source.title}/>)}
                 </Picker>
+                {token && <Button onPress={onSignOut}><Text>Выйти из системы</Text></Button>}
             </React.Fragment>
         );
     }
@@ -27,5 +28,7 @@ export default class SettingsScreen extends React.PureComponent {
 SettingsScreen.propTypes = {
     adsSources: PropTypes.array.isRequired,
     setAdsSource: PropTypes.func.isRequired,
-    currentAdsSourceId: PropTypes.number.isRequired
+    currentAdsSourceId: PropTypes.number.isRequired,
+    onSignOut: PropTypes.func.isRequired,
+    token: PropTypes.string
 };

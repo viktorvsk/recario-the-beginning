@@ -41,12 +41,20 @@ export default class API {
         return apiService.get(`/ads/${id}`);
     }
 
-    static signIn(phone, pass) {
-        return apiService.put("/sessions", {phone_number: phone, password: pass});
+    static signIn(phone, code) {
+        return apiService.put("/sessions", {phone_number: phone, verification_code: code});
+    }
+
+    static requestCode(phone) {
+        return apiService.post("/sessions", {phone_number: phone});
     }
 
     static signOut(access_token) {
         return apiService.delete("/sessions", {access_token: access_token});
+    }
+
+    static forgot(phone) {
+        return apiService.post("/sessions", {phone_number: phone, reset: 1});
     }
 
     static updateContacts(contacts, access_token) {

@@ -7,7 +7,7 @@ import {Dimensions} from "react-native";
 
 
 import {updateContacts, getContacts} from "../../actions/contactsActions";
-import {showModal, hideModal, signIn} from "../../actions/sessionsActions";
+import {showModal, hideModal, signIn, requestCode} from "../../actions/sessionsActions";
 import {loadAd} from "../../actions/adsActions";
 
 import ContactsScreen from "../screens/ContactsScreen";
@@ -20,19 +20,8 @@ class ContactsContainer extends React.PureComponent {
       headerBackTitle: "Друзья"
   }
 
-  // componentDidMount() {
-  //   this._sub = this.props.navigation.addListener(
-  //     'didFocus',
-  //     () => { if (!this.props.token) { this.props.showModal() } }
-  //   );
-  // }
-
-  // componentWillUnmount() {
-  //   this._sub.remove();
-  // }
-
   render() {
-      const {signIn, showModal, hideModal, sessionModalVisible, token, navigation, postUpdatedContacts, getContacts, fAds, fofAds, isLoading, settingsFilters, loadAd} = this.props;
+      const {showModal, hideModal, sessionModalVisible, token, navigation, postUpdatedContacts, getContacts, fAds, fofAds, isLoading, settingsFilters, loadAd} = this.props;
       const dataProvider = new DataProvider((r1, r2) => r1.key !== r2.key);
       const rowRenderer = (type, data) => <AdCar filters={settingsFilters} ad={data} nav={navigation} onPress={() => {
           loadAd(data.id);
@@ -46,9 +35,14 @@ class ContactsContainer extends React.PureComponent {
               dim.height = 470;
           }
       );
-      const onSignIn = async (phone, pass) => {
-          await signIn(phone, pass);
-          getContacts();
+
+      const onRequest = (phone) => {
+          this.props.requestCode(phone);
+      };
+
+      const onSignIn = async (phone, code) => {
+          await this.props.signIn(phone, code);
+          this.props.getContacts();
       };
 
       return(
@@ -66,6 +60,7 @@ class ContactsContainer extends React.PureComponent {
               hideModal={hideModal}
               sessionModalVisible={sessionModalVisible}
               onSignIn={onSignIn}
+              onRequest={onRequest}
               nav={navigation}
           />
 
@@ -88,7 +83,8 @@ function mapDispatchToProps(dispatch) {
     return {
         showModal: () => dispatch(showModal()),
         hideModal: () => dispatch(hideModal()),
-        signIn: (phone, pass) => dispatch(signIn(phone, pass)),
+        signIn: (phone, code) => dispatch(signIn(phone, code)),
+        requestCode: (phone) => dispatch(requestCode(phone)),
         getContacts: () => dispatch(getContacts()),
         loadAd: (id) => dispatch(loadAd(id)),
         postUpdatedContacts: async () => {
@@ -126,6 +122,7 @@ ContactsContainer.propTypes = {
     showModal: PropTypes.func.isRequired,
     hideModal: PropTypes.func.isRequired,
     signIn: PropTypes.func.isRequired,
+    requestCode: PropTypes.func.isRequired,
     sessionModalVisible: PropTypes.bool.isRequired
 };
 

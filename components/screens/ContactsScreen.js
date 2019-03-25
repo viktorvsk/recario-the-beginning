@@ -21,14 +21,14 @@ export default class ContactsScreen extends React.PureComponent {
     }
 
     render () {
-        const {fAds, fofAds, isLoading, rowRenderer, dataProvider, layoutProvider, token, showModal, hideModal, onSignIn, sessionModalVisible} = this.props;
+        const {fAds, fofAds, isLoading, rowRenderer, dataProvider, layoutProvider, token, showModal, hideModal, onSignIn, onRequest, sessionModalVisible} = this.props;
 
         if (!token) {
             return(
                 <View>
                     <Text>Для того, чтобы увидеть список друзей, нужно войти в систему</Text>
                     <Button onPress={showModal}><Text>Войти</Text></Button>
-                    <SessionsModal sessionModalVisible={sessionModalVisible} onSignIn={onSignIn} showModal={showModal} hideModal={hideModal}/>
+                    <SessionsModal sessionModalVisible={sessionModalVisible} onSignIn={onSignIn} onRequest={onRequest} showModal={showModal} hideModal={hideModal}/>
                 </View>
             );
         }
@@ -74,6 +74,7 @@ ContactsScreen.propTypes = {
     showModal: PropTypes.func.isRequired,
     hideModal: PropTypes.func.isRequired,
     onSignIn: PropTypes.func.isRequired,
+    onRequest: PropTypes.func.isRequired,
     nav: PropTypes.object.isRequired,
     token: PropTypes.string,
     sessionModalVisible: PropTypes.bool.isRequired

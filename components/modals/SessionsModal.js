@@ -8,7 +8,7 @@ import Login from "../Login";
 export default class SessionsModal extends React.PureComponent {
 
     render () {
-        const {onSignIn, sessionModalVisible, hideModal} = this.props;
+        const {onSignIn, onRequest, sessionModalVisible, hideModal} = this.props;
 
         return(
             <View style={styles.container}>
@@ -17,8 +17,8 @@ export default class SessionsModal extends React.PureComponent {
                     visible={sessionModalVisible}
                 >
                     <View style={styles.modal}>
-                        <Icon name="ios-close" onPress={hideModal}/>
-                        <Login onSignIn={onSignIn}/>
+                        <Icon name="ios-close" onPress={hideModal} style={styles.close}/>
+                        <Login onSignIn={onSignIn} onRequest={onRequest}/>
                     </View>
 
 
@@ -31,25 +31,23 @@ export default class SessionsModal extends React.PureComponent {
 const styles = StyleSheet.create({
     container: {
 
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#ecf0f1",
-        marginTop:30
+
+        marginTop:5
     },
     modal: {
         flex: 1,
-        alignItems: "center",
-        backgroundColor: "#00ff00",
+        backgroundColor: "rgba(0,0,0,0.5)",
         padding: 5
     },
-    text: {
-        color: "#3f2949",
-        marginTop: 10
+    close: {
+        textAlign: "right",
+        marginBottom: 30
     }
 });
 
 SessionsModal.propTypes = {
     onSignIn: PropTypes.func.isRequired,
+    onRequest: PropTypes.func.isRequired,
     showModal: PropTypes.func.isRequired,
     hideModal: PropTypes.func.isRequired,
     sessionModalVisible: PropTypes.bool.isRequired

@@ -8,7 +8,7 @@ import {mapTitleById} from "../../Utils";
 export default class AdScreen extends React.PureComponent {
 
     render () {
-        const {other_ads, car_gear_type_id, car_fuel_type_id, car_wheels_type_id, car_carcass_type_id, url, description, title, region, color, year, price, race, engine_capacity, images, versions} = this.props.ad;
+        const {friends, other_ads, car_gear_type_id, car_fuel_type_id, car_wheels_type_id, car_carcass_type_id, url, description, title, region, color, year, price, race, engine_capacity, images, versions} = this.props.ad;
         const {gear_types, fuel_types, wheels_types, carcass_types} = this.props.filters;
         const gearType = mapTitleById(gear_types, car_gear_type_id);
         const fuelType = mapTitleById(fuel_types, car_fuel_type_id);
@@ -49,6 +49,12 @@ export default class AdScreen extends React.PureComponent {
                         </React.Fragment>
                     }
                     {other_ads && other_ads.length > 0 && <Text style={{padding: 16}}>У этого продавца еще {other_ads.length} других объявлений</Text>}
+                    {friends && friends.length > 0 &&
+                        <React.Fragment>
+                            <H3 style={{padding: 16}}>Друзья, кто знает продавца</H3>
+                            {friends.map((f) => <ListItem><Text>{f}</Text></ListItem>)}
+                        </React.Fragment>
+                    }
                 </Content>
             </Container>
 

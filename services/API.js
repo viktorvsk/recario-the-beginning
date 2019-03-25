@@ -37,8 +37,8 @@ export default class API {
         return apiService.get("/ads", {params});
     }
 
-    static getAd(id) {
-        return apiService.get(`/ads/${id}`);
+    static getAd(id, token) {
+        return apiService.get(`/ads/${id}?access_token=${token}`);
     }
 
     static signIn(phone, code) {

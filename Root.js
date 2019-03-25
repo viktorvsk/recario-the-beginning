@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {View} from "react-native";
 import {connect} from "react-redux";
 
 import {Spinner} from "native-base";
@@ -19,7 +20,7 @@ class Root extends React.Component {
     render () {
         const {isLoading} = this.props;
 
-        return (isLoading ? <Spinner /> : <AppNavigator />);
+        return (isLoading ? <View style={{paddingTop: 25}}><Spinner /></View> : <AppNavigator />);
     }
 }
 

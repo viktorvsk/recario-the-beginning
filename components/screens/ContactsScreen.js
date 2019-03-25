@@ -25,7 +25,7 @@ export default class ContactsScreen extends React.PureComponent {
 
         if (!token) {
             return(
-                <View>
+                <View style={{padding: 16}}>
                     <Text>Для того, чтобы увидеть список друзей, нужно войти в систему</Text>
                     <Button onPress={showModal}><Text>Войти</Text></Button>
                     <SessionsModal sessionModalVisible={sessionModalVisible} onSignIn={onSignIn} onRequest={onRequest} showModal={showModal} hideModal={hideModal}/>

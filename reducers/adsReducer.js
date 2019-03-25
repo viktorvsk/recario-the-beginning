@@ -1,16 +1,15 @@
 import * as ActionTypes from "../actions/actionTypes";
 
-const initialState = { currentAd: { images: [], versions: [] }, isLoading: false };
+const initialState = { currentAd: { images: [], versions: [] }, isLoading: false, ads: [], currentYear: undefined };
 
 export default function adsReducer(state = initialState, action = {}) {
-    state.currentYear = undefined;
-    state.ads = [];
     switch (action.type) {
     // ModelPage
     case ActionTypes.GET_ADS_STARTED:
         return {
             ...state,
-            isLoading: true
+            isLoading: true,
+            ads: []
         };
     case ActionTypes.GET_ADS_SUCCESS:
         return {
@@ -22,6 +21,7 @@ export default function adsReducer(state = initialState, action = {}) {
     case ActionTypes.GET_ADS_FAILED:
         return {
             ...state,
+            ads: [],
             isLoading: false
         };
     case ActionTypes.SET_ADS_SOURCE:

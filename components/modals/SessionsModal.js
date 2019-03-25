@@ -11,7 +11,7 @@ export default class SessionsModal extends React.PureComponent {
         const {onSignIn, onRequest, sessionModalVisible, hideModal} = this.props;
 
         return(
-            <View style={styles.container}>
+            <View>
                 <Modal animationType="slide"
                     transparent={true}
                     visible={sessionModalVisible}
@@ -29,19 +29,17 @@ export default class SessionsModal extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
-    container: {
-
-
-        marginTop:5
-    },
     modal: {
         flex: 1,
         backgroundColor: "rgba(0,0,0,0.5)",
-        padding: 5
+        padding: 5,
+        paddingTop: 25
     },
     close: {
         textAlign: "right",
-        marginBottom: 30
+        marginBottom: 30,
+        marginRight: 10,
+        marginTop: 10
     }
 });
 

@@ -54,13 +54,13 @@ export default class AdScreen extends React.PureComponent {
                         <React.Fragment>
                             <H3 style={{padding: 16}}>Друзья, кто знает продавца</H3>
                             {friends.map((f) => {
-                                    return(
-                                        <ListItem key={f.id}>
-                                            <Button onPress={() => askFriend(id, f.id)}><Text>Спросить</Text></Button>
-                                            <Body><Text>{f.name}</Text></Body>
-                                        </ListItem>
-                                    );
-                                })
+                                return(
+                                    <ListItem key={f.id}>
+                                        <Button onPress={() => askFriend(id, f.id)}><Text>Спросить</Text></Button>
+                                        <Body><Text>{f.name}</Text></Body>
+                                    </ListItem>
+                                );
+                            })
                             }
                         </React.Fragment>
                     }
@@ -92,6 +92,7 @@ AdScreen.propTypes = {
         race: PropTypes.number.isRequired,
         engine_capacity: PropTypes.number,
         images: PropTypes.array.isRequired,
-        versions: PropTypes.array.isRequired
+        versions: PropTypes.array.isRequired,
+        friends: PropTypes.array
     })
 };

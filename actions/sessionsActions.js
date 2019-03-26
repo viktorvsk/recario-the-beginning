@@ -1,6 +1,7 @@
 import * as ActionTypes from "./actionTypes.js";
 import API from "../services/API";
 import {displayError} from "../actions/errorsActions";
+import {setAccessToken, clearAccessToken} from "../AsyncStorage";
 
 export function signIn(phone, code) {
     return function(dispatch) {
@@ -8,7 +9,9 @@ export function signIn(phone, code) {
 
         return API.signIn(phone, code)
             .then(signInPayload => {
-                dispatch({type: ActionTypes.SIGN_IN_SUCCESS, token: signInPayload.data.access_token});
+                const token = signInPayload.data.access_token;
+                dispatch({type: ActionTypes.SIGN_IN_SUCCESS, token: token});
+                setAccessToken(token);
             })
             .catch((error) => {
                 dispatch({type: ActionTypes.SIGN_IN_FAILED});
@@ -38,7 +41,10 @@ export function signOut() {
 
         return API.signOut(getState().settings.accessToken)
             .then(signOutPayload => {
-                if (signOutPayload.data.message === "ok") { dispatch({type: ActionTypes.SIGN_OUT_SUCCESS}); }
+                if (signOutPayload.data.message === "ok") {
+                    dispatch({type: ActionTypes.SIGN_OUT_SUCCESS});
+                    clearAccessToken();
+                }
             })
             .catch((error) => {
                 dispatch({type: ActionTypes.SIGN_OUT_FAILED});

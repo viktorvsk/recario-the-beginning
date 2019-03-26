@@ -10,7 +10,7 @@ const initialState = {
     model_images: {},
     isLoading: true,
     adsSources: [{ title: "", id: 1, selected: true}],
-    accessToken: "TsjaptGuaYxvnkyyqGMC",
+    accessToken: undefined,
     sessionModalVisible: false
 };
 

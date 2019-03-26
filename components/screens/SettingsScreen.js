@@ -9,6 +9,7 @@ export default class SettingsScreen extends React.PureComponent {
 
         return(
             <React.Fragment>
+                <Text>{token}</Text>
                 <Text style={{paddingLeft: 16}}>Выберите источник объявлений</Text>
                 <Picker mode="dropdown"
                     iosHeader="Выберите источник"

@@ -5,7 +5,7 @@ let baseURL = "";
 if (process.env.NODE_ENV === "production") {
     baseURL = "http://api.recar.io/api/v1";
 } else {
-    baseURL = "http://api.recar.io/api/v1";
+    baseURL = "http://192.168.0.102:3000/api/v1";
 }
 
 

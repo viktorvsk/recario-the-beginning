@@ -34,27 +34,27 @@ export default class ContactsScreen extends React.PureComponent {
         }
 
         if (isLoading) { return <Spinner />; }
-        if (fAds.length === 0) { return <Text>У вас нет друзей</Text>; }
-        if (fofAds.length === 0) { return <Text>У вас нет друзей</Text>; }
 
         return(
             <View style={{flex:1, width: "100%", height: 520}}>
                 <Tabs locked renderTabBar={()=> <ScrollableTab />}>
                     <Tab heading="Друзья">
-                        <AdsListScreen dataProvider={dataProvider}
+                        {fAds.length === 0 && <Text>У вас нет друзей</Text>}
+                        {fAds.length > 0 && <AdsListScreen dataProvider={dataProvider}
                             rowRenderer={rowRenderer}
                             layoutProvider={layoutProvider}
                             ads={fAds}
                             title="Объявления ваших друзей"
-                        />
+                        />}
                     </Tab>
                     <Tab heading="Друзья друзей">
-                        <AdsListScreen dataProvider={dataProvider}
+                        {fofAds.length === 0 && <Text>У вас нет друзей</Text>}
+                        {fofAds.length > 0 && <AdsListScreen dataProvider={dataProvider}
                             rowRenderer={rowRenderer}
                             layoutProvider={layoutProvider}
                             ads={fofAds}
                             title="Объявления друзей ваших друзей"
-                        />
+                        />}
                     </Tab>
                 </Tabs>
             </View>

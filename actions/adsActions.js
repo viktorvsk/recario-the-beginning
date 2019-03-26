@@ -13,3 +13,18 @@ export function loadAd(id) {
             });
     };
 }
+
+export function askFriend(adId, friendId) {
+  return function(dispatch, getState) {
+    dispatch({type: ActionTypes.ASK_FRIEND_STARTED});
+
+    return API.askFriend(adId, friendId, getState().settings.accessToken)
+              .then(askFriendPayload => {
+                if (askFriendPayload.data.message === "ok") { dispath({type: ActionTypes.ASK_FRIEND_SUCCESS}); }
+              })
+              .catch((error) => {
+                  dispatch({type: ActionTypes.ASK_FRIEND_FAILED});
+                  dispatch(displayError(error));
+              });
+  }
+}

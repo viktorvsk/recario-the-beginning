@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 
 import {Spinner} from "native-base";
 
-import {loadAd} from "../../actions/adsActions";
+import {loadAd, askFriend} from "../../actions/adsActions";
 
 import AdScreen from "../screens/AdScreen";
 
@@ -30,12 +30,12 @@ class AdContainer extends React.PureComponent {
   }
 
   render() {
-      const {navigation, isLoading, ad, settingsFilters} = this.props;
+      const {navigation, isLoading, ad, settingsFilters, askFriend} = this.props;
 
       if (isLoading) { return <Spinner/>; }
 
       return(
-          <AdScreen nav={navigation} ad={ad} filters={settingsFilters} />
+          <AdScreen nav={navigation} ad={ad} filters={settingsFilters} askFriend={askFriend}/>
       );
   }
 }
@@ -45,13 +45,13 @@ function mapStateToProps(state) {
         isLoading: state.ads.isLoading,
         ad: state.ads.currentAd,
         settingsFilters: state.settings.filters
-
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        loadAd: (id) => { dispatch(loadAd(id)); }
+        loadAd: (id) => { dispatch(loadAd(id)); },
+        askFriend: (adId, friendId) => { dispatch(askFriend(adId, friendId)); }
     };
 }
 
@@ -62,5 +62,6 @@ AdContainer.propTypes = {
     isLoading: PropTypes.bool.isRequired,
     ad: PropTypes.object.isRequired,
     settingsFilters: PropTypes.object.isRequired,
-    loadAd: PropTypes.func.isRequired
+    loadAd: PropTypes.func.isRequired,
+    askFriend: PropTypes.func.isRequired
 };

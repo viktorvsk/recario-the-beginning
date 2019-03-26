@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Container, Content, Text, Title, H3, List, ListItem, Left, Right} from "native-base";
+import {Container, Content, Text, Title, H3, List, ListItem, Left, Right, Button, Body} from "native-base";
 import Gallery from "react-native-image-gallery";
 
 import {mapTitleById} from "../../Utils";
@@ -8,8 +8,9 @@ import {mapTitleById} from "../../Utils";
 export default class AdScreen extends React.PureComponent {
 
     render () {
-        const {friends, other_ads, car_gear_type_id, car_fuel_type_id, car_wheels_type_id, car_carcass_type_id, url, description, title, region, color, year, price, race, engine_capacity, images, versions} = this.props.ad;
+        const {id, friends, other_ads, car_gear_type_id, car_fuel_type_id, car_wheels_type_id, car_carcass_type_id, url, description, title, region, color, year, price, race, engine_capacity, images, versions} = this.props.ad;
         const {gear_types, fuel_types, wheels_types, carcass_types} = this.props.filters;
+        const {askFriend} = this.props;
         const gearType = mapTitleById(gear_types, car_gear_type_id);
         const fuelType = mapTitleById(fuel_types, car_fuel_type_id);
         const wheelsType = mapTitleById(wheels_types, car_wheels_type_id);
@@ -52,7 +53,15 @@ export default class AdScreen extends React.PureComponent {
                     {friends && friends.length > 0 &&
                         <React.Fragment>
                             <H3 style={{padding: 16}}>Друзья, кто знает продавца</H3>
-                            {friends.map((f) => <ListItem><Text>{f}</Text></ListItem>)}
+                            {friends.map((f) => {
+                                    return(
+                                        <ListItem key={f.id}>
+                                            <Button onPress={() => askFriend(id, f.id)}><Text>Спросить</Text></Button>
+                                            <Body><Text>{f.name}</Text></Body>
+                                        </ListItem>
+                                    );
+                                })
+                            }
                         </React.Fragment>
                     }
                 </Content>
@@ -65,7 +74,9 @@ export default class AdScreen extends React.PureComponent {
 
 AdScreen.propTypes = {
     filters: PropTypes.object.isRequired,
+    askFriend: PropTypes.func.isRequired,
     ad: PropTypes.shape({
+        id: PropTypes.number.isRequired,
         other_ads: PropTypes.array,
         car_gear_type_id: PropTypes.number,
         car_fuel_type_id: PropTypes.number,

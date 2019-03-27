@@ -27,7 +27,7 @@ export default class ContactsScreen extends React.PureComponent {
             return(
                 <View style={{padding: 16}}>
                     <Text>Для того, чтобы увидеть список друзей, нужно войти в систему</Text>
-                    <Button onPress={showModal}><Text>Войти</Text></Button>
+                    <Button onPress={showModal} style={{marginTop: 16}} rounded><Text>Войти</Text></Button>
                     <SessionsModal sessionModalVisible={sessionModalVisible} onSignIn={onSignIn} onRequest={onRequest} showModal={showModal} hideModal={hideModal}/>
                 </View>
             );

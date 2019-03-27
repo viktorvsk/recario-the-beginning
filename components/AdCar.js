@@ -7,9 +7,9 @@ import {mapTitleById} from "../Utils";
 
 export default class AdCar extends React.PureComponent {
     render () {
-        const {is_owner, car_gear_type_id, car_fuel_type_id, car_wheels_type_id, region, price, engine_capacity, images} = this.props.ad;
+        const {is_owner, title, car_gear_type_id, car_fuel_type_id, car_wheels_type_id, region, price, engine_capacity, images} = this.props.ad;
 
-        const {onPress} = this.props;
+        const {onPress, withTitle} = this.props;
         const {gear_types, fuel_types, wheels_types} = this.props.filters;
         const gearType = mapTitleById(gear_types, car_gear_type_id);
         const fuelType = mapTitleById(fuel_types, car_fuel_type_id);
@@ -18,6 +18,11 @@ export default class AdCar extends React.PureComponent {
 
         return(
             <Card>
+                {withTitle &&
+                <CardItem style={{height: 50}} header bordered button onPress={onPress}>
+                    <Text>{title}</Text>
+                </CardItem>
+                }
                 <CardItem style={{height: 300}} cardBody>
                     <TouchableHighlight onPress={onPress} style={{ height: 300, flex: 1 }}><Image style={{ height: 300, flex: 1 }} source={{uri: images[0]}}/></TouchableHighlight>
                 </CardItem>
@@ -44,6 +49,7 @@ export default class AdCar extends React.PureComponent {
 
 AdCar.propTypes = {
     onPress: PropTypes.func.isRequired,
+    withTitle: PropTypes.bool,
     filters: PropTypes.shape({
         gear_types: PropTypes.array.isRequired,
         fuel_types: PropTypes.array.isRequired,
@@ -51,6 +57,7 @@ AdCar.propTypes = {
         carcass_types: PropTypes.array.isRequired
     }),
     ad: PropTypes.shape({
+        title: PropTypes.string.isRequired,
         is_owner: PropTypes.bool,
         car_gear_type_id: PropTypes.number,
         car_fuel_type_id: PropTypes.number,

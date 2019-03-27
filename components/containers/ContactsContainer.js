@@ -23,16 +23,16 @@ class ContactsContainer extends React.PureComponent {
   render() {
       const {showModal, hideModal, sessionModalVisible, token, navigation, postUpdatedContacts, getContacts, fAds, fofAds, isLoading, settingsFilters, loadAd} = this.props;
       const dataProvider = new DataProvider((r1, r2) => r1.key !== r2.key);
-      const rowRenderer = (type, data) => <AdCar filters={settingsFilters} ad={data} nav={navigation} onPress={() => {
+      const rowRenderer = (type, data) => <AdCar withTitle={true} filters={settingsFilters} ad={data} nav={navigation} onPress={() => {
           loadAd(data.id);
-          navigation.push("Ad");
+          navigation.navigate("Ad");
       }
       }/>;
       const layoutProvider = new LayoutProvider(
           () => 0,
           (type, dim) => {
               dim.width = Dimensions.get("window").width;
-              dim.height = 470;
+              dim.height = 520;
           }
       );
 

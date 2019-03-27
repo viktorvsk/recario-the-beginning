@@ -43,6 +43,11 @@ export default function adsReducer(state = initialState, action = {}) {
             ...state,
             isLoading: false
         };
+    case ActionTypes.CLEAR_CURRENT_YEAR:
+        return {
+            ...state,
+            currentYear: undefined
+        };
     default:
         return state;
     }

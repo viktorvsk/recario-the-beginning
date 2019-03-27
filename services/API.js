@@ -8,6 +8,7 @@ if (process.env.NODE_ENV === "production") {
     baseURL = "http://192.168.0.102:3000/api/v1";
 }
 
+let cancel;
 
 const apiService = axios.create({
     baseURL: baseURL
@@ -25,7 +26,8 @@ export default class API {
     }
 
     static autocompleteModels (query, adsSourceId) {
-        return apiService.get(`/models/autocomplete?q=${query}&ads_source_id=${adsSourceId}`);
+        cancel && cancel();
+        return apiService.get(`/models/autocomplete?q=${query}&ads_source_id=${adsSourceId}`, { cancelToken: new axios.CancelToken(function executor(c) { cancel = c; }) });
     }
 
     static getSettings () {

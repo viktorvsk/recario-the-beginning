@@ -1,6 +1,7 @@
 import * as ActionTypes from "./actionTypes.js";
 import API from "../services/API";
 import {displayError} from "../actions/errorsActions";
+import {clearAccessToken} from "../AsyncStorage";
 
 export function updateContacts(contacts) {
     return function(dispatch, getState) {
@@ -13,6 +14,8 @@ export function updateContacts(contacts) {
         }).catch((error) => {
             dispatch({type: ActionTypes.UPDATE_CONTACTS_FAILED});
             dispatch(displayError(error));
+            clearAccessToken();
+            dispatch({type: ActionTypes.SIGN_OUT_SUCCESS});
         });
     };
 }
@@ -28,6 +31,8 @@ export function getContacts() {
         }).catch((error) => {
             dispatch({type: ActionTypes.GET_CONTACTS_FAILED});
             dispatch(displayError(error));
+            clearAccessToken();
+            dispatch({type: ActionTypes.SIGN_OUT_SUCCESS});
         });
     };
 }

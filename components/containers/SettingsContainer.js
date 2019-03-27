@@ -13,10 +13,16 @@ class SettingsContainer extends React.PureComponent {
   }
 
   render() {
-      const {adsSources, setAdsSource, currentAdsSourceId, token, onSignOut} = this.props;
+      const {adsSources, setAdsSource, currentAdsSourceId, token, onSignOut, isSignOutLoading} = this.props;
 
       return(
-          <SettingsScreen adsSources={adsSources} setAdsSource={setAdsSource} currentAdsSourceId={currentAdsSourceId} onSignOut={onSignOut} token={token}/>
+          <SettingsScreen adsSources={adsSources}
+                          setAdsSource={setAdsSource}
+                          currentAdsSourceId={currentAdsSourceId}
+                          onSignOut={onSignOut}
+                          token={token}
+                          isSignOutLoading={isSignOutLoading}
+          />
       );
   }
 }
@@ -26,7 +32,8 @@ function mapStateToProps(state) {
     return {
         adsSources: state.settings.adsSources,
         currentAdsSourceId: state.settings.currentAdsSourceId,
-        token: state.settings.accessToken
+        token: state.settings.accessToken,
+        isSignOutLoading: state.settings.isSignOutLoading
     };
 }
 
@@ -44,6 +51,7 @@ SettingsContainer.propTypes = {
     setAdsSource: PropTypes.func.isRequired,
     currentAdsSourceId: PropTypes.number.isRequired,
     onSignOut: PropTypes.func.isRequired,
-    token: PropTypes.string
+    token: PropTypes.string,
+    isSignOutLoading: PropTypes.bool.isRequired
 };
 

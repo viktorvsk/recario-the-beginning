@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {Text, Picker, Button} from "native-base";
+import {Text, Picker, Button, Spinner} from "native-base";
 
 
 export default class SettingsScreen extends React.PureComponent {
     render () {
-        const {adsSources, setAdsSource, currentAdsSourceId, onSignOut, token} = this.props;
+        const {adsSources, setAdsSource, currentAdsSourceId, onSignOut, token, isSignOutLoading} = this.props;
 
         return(
             <React.Fragment>
@@ -19,7 +19,8 @@ export default class SettingsScreen extends React.PureComponent {
                 >
                     {adsSources.map(source => <Picker.Item value={source.id} key={source.id} label={source.title}/>)}
                 </Picker>
-                {token && <Button onPress={onSignOut} style={{marginLeft: 16}} rounded><Text>Выйти из системы</Text></Button>}
+                {token && isSignOutLoading && <Spinner />}
+                {token && !isSignOutLoading && <Button onPress={onSignOut} style={{marginLeft: 16}} rounded><Text>Выйти из системы</Text></Button>}
             </React.Fragment>
         );
     }

@@ -11,7 +11,8 @@ const initialState = {
     isLoading: true,
     adsSources: [{ title: "", id: 1, selected: true}],
     accessToken: undefined,
-    sessionModalVisible: false
+    sessionModalVisible: false,
+    isSignOutLoading: false
 };
 
 export default function settingsReducer(state = initialState, action = {}) {
@@ -52,12 +53,23 @@ export default function settingsReducer(state = initialState, action = {}) {
             ...state,
             accessToken: action.token
         };
+    case ActionTypes.SIGN_OUT_STARTED:
+        return {
+            ...state,
+            isSignOutLoading: true
+        }
     case ActionTypes.SIGN_OUT_SUCCESS:
         return {
             ...state,
             accessToken: undefined,
-            sessionModalVisible: false
+            sessionModalVisible: false,
+            isSignOutLoading: false
         };
+    case ActionTypes.SIGN_OUT_FAILED:
+        return {
+            ...state,
+            isSignOutLoading: false
+        }
     case ActionTypes.SHOW_SESSION_MODAL:
         return {
             ...state,

@@ -28,13 +28,18 @@ export default class Login extends React.Component {
             <Form style={styles.container}>
                 {this.state.step === 1 &&
                     <React.Fragment>
-                        <ListItem><Input placeholder="Телефон" onChange={(event) => this.setState({phone: event.nativeEvent.text})}/></ListItem>
+                        <Text>Войдите в систему, получив код в сообщении</Text>
+                        <ListItem>
+                            <Text style={{fontSize: 19, color: "#aaa"}}>+380</Text>
+                            <Input style={{fontSize: 18}} placeholder="Телефон" onChange={(event) => this.setState({phone: event.nativeEvent.text})}/>
+                        </ListItem>
                         <Button onPress={this.onRequest.bind(this)} style={styles.submit} rounded><Text>Получить код</Text></Button>
                     </React.Fragment>
                 }
 
                 {this.state.step === 2 &&
                     <React.Fragment>
+                        <Text>Введите полученный код. Он должен прийти через несколько секунд</Text>
                         <ListItem><Input placeholder="Код" onChange={(event) => this.setState({code: event.nativeEvent.text})}/></ListItem>
                         <Button onPress={this.onSignIn.bind(this)} style={styles.submit} rounded><Text>Войти</Text></Button>
                     </React.Fragment>
@@ -49,7 +54,8 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: "#fff",
         padding: 10,
-        flex: 0
+        flex: 0,
+        borderRadius: 7
     },
     modal: {
 

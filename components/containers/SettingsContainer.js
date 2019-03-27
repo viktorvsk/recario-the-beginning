@@ -9,8 +9,7 @@ import SettingsScreen from "../screens/SettingsScreen";
 
 class SettingsContainer extends React.PureComponent {
   static navigationOptions = {
-      title: "reCar.io",
-      headerBackTitle: "Настройки"
+      title: "reCar.io", headerBackTitle: null
   }
 
   render() {

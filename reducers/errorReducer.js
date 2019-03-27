@@ -6,8 +6,8 @@ export default function errorReducer(state = {}, action ={}){
         return {
             ...state,
             message: action.error.message,
-            status: action.error.response.status,
-            statusText: action.error.response.statusText
+            status: action.error.response && action.error.response.status,
+            statusText: action.error.response && action.error.response.statusText
         };
     default:
         return {};

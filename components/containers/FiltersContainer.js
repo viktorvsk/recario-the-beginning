@@ -10,8 +10,7 @@ import FiltersBar from "../FiltersBar";
 
 class FiltersContainer extends React.PureComponent {
   static navigationOptions = {
-      title: "reCar.io",
-      headerBackTitle: "Фильтр"
+      title: "reCar.io", headerBackTitle: null
   }
 
   render() {

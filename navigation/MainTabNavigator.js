@@ -28,7 +28,10 @@ SearchStack.navigationOptions = {
 };
 
 const ModelStack = createStackNavigator({
-    SearchModel: SearchModelContainer
+    SearchModel: SearchModelContainer,
+    Model: ModelContainer,
+    AdsList: AdsListContainer,
+    Ad: AdContainer
 });
 
 ModelStack.navigationOptions = {

@@ -14,8 +14,12 @@ import AdCar from "../AdCar";
 
 class AdsListContainer extends React.PureComponent {
   static navigationOptions = {
-      title: "reCar.io",
-      headerBackTitle: "Объявления"
+      title: "reCar.io", headerBackTitle: null
+  }
+
+  componentDidMount() {
+      const {ads, navigation} = this.props;
+      if (ads.length === 0) { navigation.popToTop(); }
   }
   render() {
       const {loadAd, navigation, ads, settingsFilters, title, currentAdsFilters} = this.props;

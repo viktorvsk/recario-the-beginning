@@ -9,7 +9,7 @@ import SuggestionsModelsList from "../SuggestionsModelsList";
 
 class SearchModelContainer extends React.PureComponent {
   static navigationOptions = {
-      title: "reCar.io"
+      title: "reCar.io", headerBackTitle: null
   }
 
   render () {

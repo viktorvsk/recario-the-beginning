@@ -23,7 +23,8 @@ export default function autocompleteReducer(state = autocompleteInitialState, ac
     case ActionTypes.LOAD_SUGGESTIONS_BEGIN:
         return {
             ...state,
-            isLoading: true
+            isLoading: true,
+            suggestions: []
         };
 
     case ActionTypes.MAYBE_UPDATE_SUGGESTIONS:
@@ -37,6 +38,7 @@ export default function autocompleteReducer(state = autocompleteInitialState, ac
     case ActionTypes.LOAD_SUGGESTIONS_FAILED:
         return {
             ...state,
+            suggestions: [],
             isLoading: false
         };
 

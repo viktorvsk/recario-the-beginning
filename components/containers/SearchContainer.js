@@ -10,8 +10,7 @@ import MakerModelsTabs from "../MakerModelsTabs";
 class SearchContainer extends React.PureComponent {
 
   static navigationOptions = {
-      title: "reCar.io",
-      headerBackTitle: "Модели"
+      title: "reCar.io", headerBackTitle: null
   }
 
   render() {

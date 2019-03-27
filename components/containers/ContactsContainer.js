@@ -16,8 +16,7 @@ import AdCar from "../AdCar";
 
 class ContactsContainer extends React.PureComponent {
   static navigationOptions = {
-      title: "reCar.io",
-      headerBackTitle: "Друзья"
+      title: "reCar.io", headerBackTitle: null
   }
 
   render() {

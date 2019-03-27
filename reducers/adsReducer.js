@@ -5,9 +5,16 @@ const initialState = { currentAd: { images: [], versions: [] }, isLoading: false
 export default function adsReducer(state = initialState, action = {}) {
     switch (action.type) {
     // ModelPage
+    case ActionTypes.GET_MODEL_SUCCESS:
+        return {
+            ...state,
+            currentYear: undefined,
+            ads: []
+        };
     case ActionTypes.GET_ADS_STARTED:
         return {
             ...state,
+            currentYear: undefined,
             isLoading: true,
             ads: []
         };
@@ -21,6 +28,7 @@ export default function adsReducer(state = initialState, action = {}) {
     case ActionTypes.GET_ADS_FAILED:
         return {
             ...state,
+            currentYear: undefined,
             ads: [],
             isLoading: false
         };
@@ -46,7 +54,8 @@ export default function adsReducer(state = initialState, action = {}) {
     case ActionTypes.CLEAR_CURRENT_YEAR:
         return {
             ...state,
-            currentYear: undefined
+            currentYear: undefined,
+            ads: []
         };
     default:
         return state;

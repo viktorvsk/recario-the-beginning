@@ -8,8 +8,7 @@ import SessionsScreen from "../screens/SessionsScreen";
 
 class SessionsContainer extends React.PureComponent {
   static navigationOptions = {
-      title: "reCar.io",
-      headerBackTitle: "Настройки"
+      title: "reCar.io", headerBackTitle: null
   }
 
   render() {

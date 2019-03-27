@@ -9,8 +9,7 @@ import ModelScreen from "../screens/ModelScreen";
 
 class ModelContainer extends React.PureComponent {
   static navigationOptions = {
-      title: "reCar.io",
-      headerBackTitle: "Модель"
+      title: "reCar.io", headerBackTitle: null
   }
 
   componentDidMount() {

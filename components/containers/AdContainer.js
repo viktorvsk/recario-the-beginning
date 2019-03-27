@@ -10,7 +10,7 @@ import AdScreen from "../screens/AdScreen";
 
 class AdContainer extends React.PureComponent {
   static navigationOptions = {
-      title: "reCar.io"
+      title: "reCar.io", headerBackTitle: null
   }
 
   componentDidMount() {

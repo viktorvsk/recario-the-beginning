@@ -15,7 +15,6 @@ export function loadSuggestions(value) {
     };
 }
 
-
 export function clearCurrentYear() {
     return (dispatch) => {
         dispatch({type: ActionTypes.CLEAR_CURRENT_YEAR});

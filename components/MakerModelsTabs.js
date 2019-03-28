@@ -15,7 +15,7 @@ export default class MakerModelsTabs extends React.PureComponent {
 
         return(
             <View style={{flex:1, width: "100%", height: 520}}>
-                <Tabs locked renderTabBar={()=> <ScrollableTab />}>
+                <Tabs renderTabBar={()=> <ScrollableTab />}>
                     {models.map((maker) => {
                         return(
                             <Tab heading={`${maker} (${carModels[maker].length})`} key={maker}>

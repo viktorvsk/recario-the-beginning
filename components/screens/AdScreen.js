@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {RefreshControl} from "react-native";
-import {Container, Content, Text, Title, H3, List, ListItem, Left, Right, Button, Body} from "native-base";
+import {Container, Content, Text, Title, List, ListItem, Left, Right, Button, Body, Tabs, Tab, ScrollableTab} from "native-base";
 import Gallery from "react-native-image-gallery";
 
 import {mapTitleById} from "../../Utils";
@@ -26,37 +26,39 @@ export default class AdScreen extends React.PureComponent {
 
             <Container>
                 <Content refreshControl={<RefreshControl onRefresh={onRefresh}/>}>
-                    <Title>{title} {year}</Title>
-                    <Title style={{color: "#3498db", fontSize: 18, padding: 10}}>${price}</Title>
 
-                    {imagesURLs.length > 0 && <Gallery
-                        style={{ flex: 1, backgroundColor: "#fff", padding: 0, margin: 0, height: 300 }}
-                        images={imagesURLs}
-                    />}
+                    <Tabs renderTabBar={()=> <ScrollableTab />}>
+                        <Tab heading="Описание">
+                            <Title>{title} {year}</Title>
+                            <Title style={{color: "#3498db", fontSize: 18, padding: 10}}>${price}</Title>
 
-                    <List>
-                        {gearType && <ListItem><Left><Text>Коробка</Text></Left><Right style={{minWidth: 100}}><Text>{gearType}</Text></Right></ListItem>}
-                        {fuelString && <ListItem><Left><Text>Топливо</Text></Left><Right style={{minWidth: 100}}><Text>{fuelString}</Text></Right></ListItem>}
-                        {wheelsType && <ListItem><Left><Text>Привод</Text></Left><Right style={{minWidth: 100}}><Text>{wheelsType}</Text></Right></ListItem>}
-                        {carcassType && <ListItem><Left><Text>Кузов</Text></Left><Right style={{minWidth: 100}}><Text>{carcassType}</Text></Right></ListItem>}
-                        {region && <ListItem><Left><Text>Город</Text></Left><Right style={{minWidth: 100}}><Text>{region}</Text></Right></ListItem>}
-                        {color && <ListItem><Left><Text>Цвет</Text></Left><Right style={{minWidth: 100}}><Text>{color}</Text></Right></ListItem>}
-                        {race && <ListItem><Left><Text>Пробег</Text></Left><Right style={{minWidth: 100}}><Text>{race/1000} тыс. км</Text></Right></ListItem>}
-                    </List>
+                            {imagesURLs.length > 0 && <Gallery
+                                style={{ flex: 1, backgroundColor: "#fff", padding: 0, margin: 0, height: 300 }}
+                                images={imagesURLs}
+                            />}
 
-                    <Text style={{padding: 16}}>{description || "Описание отсутствует"}</Text>
-                    <Text style={{padding: 16}}>Источник: {url}</Text>
+                            <List>
+                                {gearType && <ListItem><Left><Text>Коробка</Text></Left><Right style={{minWidth: 100}}><Text>{gearType}</Text></Right></ListItem>}
+                                {fuelString && <ListItem><Left><Text>Топливо</Text></Left><Right style={{minWidth: 100}}><Text>{fuelString}</Text></Right></ListItem>}
+                                {wheelsType && <ListItem><Left><Text>Привод</Text></Left><Right style={{minWidth: 100}}><Text>{wheelsType}</Text></Right></ListItem>}
+                                {carcassType && <ListItem><Left><Text>Кузов</Text></Left><Right style={{minWidth: 100}}><Text>{carcassType}</Text></Right></ListItem>}
+                                {region && <ListItem><Left><Text>Город</Text></Left><Right style={{minWidth: 100}}><Text>{region}</Text></Right></ListItem>}
+                                {color && <ListItem><Left><Text>Цвет</Text></Left><Right style={{minWidth: 100}}><Text>{color}</Text></Right></ListItem>}
+                                {race && <ListItem><Left><Text>Пробег</Text></Left><Right style={{minWidth: 100}}><Text>{race/1000} тыс. км</Text></Right></ListItem>}
+                            </List>
 
-                    {versions.length > 0 &&
-                        <React.Fragment>
-                            <H3 style={{padding: 16}}>История изменений цены</H3>
-                            <Text style={{padding: 16}}>{versions.join(" -- ")} -- ${price}</Text>
-                        </React.Fragment>
-                    }
-                    {other_ads && other_ads.length > 0 && <Text style={{padding: 16}}>У этого продавца еще {other_ads.length} других объявлений</Text>}
-                    {friends && friends.length > 0 &&
-                        <React.Fragment>
-                            <H3 style={{padding: 16}}>Друзья, кто знает продавца</H3>
+                            <Text style={{padding: 16}}>{description || "Описание отсутствует"}</Text>
+                            <Text style={{padding: 16}}>Источник: {url}</Text>
+                        </Tab>
+                        {versions.length > 0 && <Tab heading="История цен">
+                            <ListItem><Body><Text>${price} (сейчас)</Text></Body></ListItem>
+                            {versions.map((v, index) => <ListItem key={index}><Body><Text>${v[1]} ({v[0]})</Text></Body></ListItem>)}
+                        </Tab>}
+                        {other_ads && other_ads.length > 0 && <Tab heading="Другие объявления продавца">
+                            <Text style={{padding: 16}}>У этого продавца еще {other_ads.length} других объявлений</Text>
+                        </Tab>}
+                        {friends && friends.length > 0 && <Tab heading="Друзья">
+                            <Text style={{padding: 16}}>Ваши друзья знают продавца этой машины, узнайте у них подрробности, если машина вам интересна. Мы отправим сообщение вашему другу с вопросом по данному автомобилю.</Text>
                             {friends.map((f) => {
                                 return(
                                     <ListItem key={f.id}>
@@ -64,10 +66,10 @@ export default class AdScreen extends React.PureComponent {
                                         <Body><Text>{f.name}</Text></Body>
                                     </ListItem>
                                 );
-                            })
-                            }
-                        </React.Fragment>
-                    }
+                            })}
+                        </Tab>}
+                    </Tabs>
+
                 </Content>
             </Container>
 

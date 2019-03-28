@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Image} from "react-native";
-import {Button, Container, Content, Spinner, Text, Title, Picker, Item, View, Form} from "native-base";
+import {Button, Container, Content, Spinner, Text, Title, Picker, Item, View, Form, Tabs, Tab, ScrollableTab} from "native-base";
 
 import {filterAds} from "../../Utils";
 
@@ -10,7 +10,7 @@ export default class ModelScreen extends React.PureComponent {
     render () {
         const {nav, currentModelId, title, currentYear, adsLoading, years, ads, onChange, onFilter, currentAdsFilters, preview, settingsFilters} = this.props;
 
-        const currentYearRow = years.filter(row => row.year === currentYear)[0];
+        const currentYearRow = years.filter(row => row.year === currentYear)[0] || years[0];
         const onPress = () => nav.push("AdsList");
         const cities =  ads.filter((value, index, self) => self.map(x => x.region).indexOf(value.region) === index)
             .filter(ad => ad.region && ad.region.trim() !== "")
@@ -20,17 +20,10 @@ export default class ModelScreen extends React.PureComponent {
         return(
             <Container padder>
                 <Content>
+                    <Tabs renderTabBar={()=> <ScrollableTab />} onChangeTab={({ref}) => { onChange(currentModelId, parseInt(ref.props.heading)); }}>
+                        {years && years.map(row => <Tab heading={row.year.toString()} key={row.year.toString()}></Tab>)}
+                    </Tabs>
                     <Title>{title}</Title>
-
-                    <Picker mode="dropdown"
-                        iosHeader="Выберите год"
-                        headerBackButtonText="Назад"
-                        placeholder="Выберите год..."
-                        selectedValue={currentYear}
-                        onValueChange={(year) => { onChange(currentModelId, year);}}
-                    >
-                        {years.map(row => <Picker.Item value={row.year} key={row.year} label={`${row.year} ($${row.min_price} - $${row.max_price})`}/>)}
-                    </Picker>
 
                     <Image style={{ height: 300, flex: 1 }} source={{uri: preview}} />
 

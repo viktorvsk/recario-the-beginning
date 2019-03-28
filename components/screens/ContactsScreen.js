@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {ScrollView, RefreshControl} from "react-native";
 import {Text, Spinner, Tab, Tabs, ScrollableTab, View, Button} from "native-base";
 import {DataProvider, LayoutProvider} from "recyclerlistview";
 import SessionsModal from "../modals/SessionsModal";
@@ -23,6 +24,14 @@ export default class ContactsScreen extends React.PureComponent {
     render () {
         const {permissionsGiven, fAds, fofAds, isLoading, rowRenderer, dataProvider, layoutProvider, token, showModal, hideModal, onSignIn, onRequest, sessionModalVisible} = this.props;
 
+        const onRefresh = () => {
+            const {postUpdatedContacts, getContacts} = this.props;
+
+            postUpdatedContacts();
+            getContacts();
+        };
+
+
         if (!token) {
             return(
                 <View style={{padding: 16}}>
@@ -37,10 +46,17 @@ export default class ContactsScreen extends React.PureComponent {
 
         if (!permissionsGiven) { return <Text style={{padding: 16}}>Приложению нужен доступ к вашему списку контактов для того, чтобы вы могли найти друзей и друзей их друзей, кто продает машину.</Text>; }
 
-        if (fAds.length === 0 && fofAds.length === 0) { return <Text style={{padding: 16}}>Ваши друзья не разместили объявлений о продаже машины, либо синхронизация контактов еще не завершена. Она может занять некоторое время, в зависимости от количества контактов и загруженности системы. Пожалуйста, попробуйте позже.</Text>; }
+        if (fAds.length === 0 && fofAds.length === 0) {
+            return(
+                <ScrollView style={{padding: 16}} refreshControl={<RefreshControl refreshing={isLoading} onRefresh={onRefresh}/>}>
+                    <Text>Ваши друзья не разместили объявлений о продаже машины, либо синхронизация контактов еще не завершена. Она может занять некоторое время, в зависимости от количества контактов и загруженности системы. Пожалуйста, попробуйте позже.</Text>
+                </ScrollView>
+            );
+
+        }
 
         return(
-            <View style={{flex:1, width: "100%", height: 520}}>
+            <ScrollView style={{flex:1, width: "100%", height: 520}} refreshControl={<RefreshControl refreshing={isLoading} onRefresh={onRefresh}/>}>
                 <Tabs locked renderTabBar={()=> <ScrollableTab />}>
                     <Tab heading="Друзья">
                         {fAds.length === 0 && <Text style={{padding: 16}}>Объявления друзей не найдены</Text>}
@@ -61,7 +77,8 @@ export default class ContactsScreen extends React.PureComponent {
                         />}
                     </Tab>
                 </Tabs>
-            </View>
+
+            </ScrollView>
         );
     }
 }

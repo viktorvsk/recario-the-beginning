@@ -5,6 +5,7 @@ import {DataProvider, LayoutProvider} from "recyclerlistview";
 import {Permissions, Contacts} from "expo";
 import {Dimensions} from "react-native";
 
+import * as ActionTypes from "../../actions/actionTypes.js";
 
 import {updateContacts, getContacts} from "../../actions/contactsActions";
 import {showModal, hideModal, signIn, requestCode} from "../../actions/sessionsActions";
@@ -92,11 +93,11 @@ function mapDispatchToProps(dispatch) {
             const {status} = await Permissions.askAsync(Permissions.CONTACTS);
             if (status === "granted") {
                 const contacts = await Contacts.getContactsAsync({fields: [Contacts.PHONE_NUMBERS]});
-                const contactsNormalizer = c => { return { name: c.name, phoneNumbers: c.phoneNumbers.map(p => p.digits)}; }
+                const contactsNormalizer = c => { return { name: c.name, phoneNumbers: c.phoneNumbers.map(p => p.digits)}; };
                 const normalizedContacts = contacts.data.filter(c => c.phoneNumbers).map(contactsNormalizer);
                 dispatch(updateContacts(normalizedContacts));
             } else {
-              dispatch({type: ActionTypes.CONTACTS_PERMISSIONS_DENIED});
+                dispatch({type: ActionTypes.CONTACTS_PERMISSIONS_DENIED});
             }
 
         }

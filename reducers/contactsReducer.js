@@ -32,7 +32,7 @@ export default function contactsRedducer(state = initialSetting, action ={}){
         return {
             ...state,
             permissionsGiven: true
-        }
+        };
     case ActionTypes.UPDATE_CONTACTS_STARTED:
         return {
             ...state,
@@ -49,7 +49,7 @@ export default function contactsRedducer(state = initialSetting, action ={}){
         return {
             ...state,
             permissionsGiven: false
-        }
+        };
     default:
         return state;
     }

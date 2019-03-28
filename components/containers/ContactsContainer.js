@@ -20,7 +20,7 @@ class ContactsContainer extends React.PureComponent {
   }
 
   render() {
-      const {showModal, hideModal, sessionModalVisible, token, navigation, postUpdatedContacts, getContacts, fAds, fofAds, isLoading, settingsFilters, loadAd} = this.props;
+      const {permissionsGiven, showModal, hideModal, sessionModalVisible, token, navigation, postUpdatedContacts, getContacts, fAds, fofAds, isLoading, settingsFilters, loadAd} = this.props;
       const dataProvider = new DataProvider((r1, r2) => r1.key !== r2.key);
       const rowRenderer = (type, data) => <AdCar withTitle={true} filters={settingsFilters} ad={data} nav={navigation} onPress={() => {
           loadAd(data.id);
@@ -61,6 +61,7 @@ class ContactsContainer extends React.PureComponent {
               onSignIn={onSignIn}
               onRequest={onRequest}
               nav={navigation}
+              permissionsGiven={permissionsGiven}
           />
 
       );
@@ -74,7 +75,8 @@ function mapStateToProps(state) {
         fofAds: state.contacts.fofAds,
         isLoading: state.contacts.isLoading,
         settingsFilters: state.settings.filters,
-        sessionModalVisible: state.settings.sessionModalVisible
+        sessionModalVisible: state.settings.sessionModalVisible,
+        permissionsGiven: state.contacts.permissionsGiven
     };
 }
 
@@ -87,21 +89,16 @@ function mapDispatchToProps(dispatch) {
         getContacts: () => dispatch(getContacts()),
         loadAd: (id) => dispatch(loadAd(id)),
         postUpdatedContacts: async () => {
-            Permissions.askAsync(Permissions.CONTACTS).then(async response => {
-                if (response.permissions.status === "denied") {
-                    // TODO: Implement redirect with message here
-                    return false;
-                }
-                const contacts = await Contacts.getContactsAsync({
-                    fields: [
-                        Contacts.PHONE_NUMBERS
-                    ]
-                });
-                const normalizedContacts = contacts.data.filter(c => c.phoneNumbers).map(c => {
-                    return { name: c.name, phoneNumbers: c.phoneNumbers.map(p => p.digits)};
-                });
+            const {status} = await Permissions.askAsync(Permissions.CONTACTS);
+            if (status === "granted") {
+                const contacts = await Contacts.getContactsAsync({fields: [Contacts.PHONE_NUMBERS]});
+                const contactsNormalizer = c => { return { name: c.name, phoneNumbers: c.phoneNumbers.map(p => p.digits)}; }
+                const normalizedContacts = contacts.data.filter(c => c.phoneNumbers).map(contactsNormalizer);
                 dispatch(updateContacts(normalizedContacts));
-            });
+            } else {
+              dispatch({type: ActionTypes.CONTACTS_PERMISSIONS_DENIED});
+            }
+
         }
     };
 }
@@ -122,6 +119,7 @@ ContactsContainer.propTypes = {
     hideModal: PropTypes.func.isRequired,
     signIn: PropTypes.func.isRequired,
     requestCode: PropTypes.func.isRequired,
-    sessionModalVisible: PropTypes.bool.isRequired
+    sessionModalVisible: PropTypes.bool.isRequired,
+    permissionsGiven: PropTypes.bool.isRequired
 };
 

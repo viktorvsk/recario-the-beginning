@@ -21,12 +21,12 @@ export default class ContactsScreen extends React.PureComponent {
     }
 
     render () {
-        const {fAds, fofAds, isLoading, rowRenderer, dataProvider, layoutProvider, token, showModal, hideModal, onSignIn, onRequest, sessionModalVisible} = this.props;
+        const {permissionsGiven, fAds, fofAds, isLoading, rowRenderer, dataProvider, layoutProvider, token, showModal, hideModal, onSignIn, onRequest, sessionModalVisible} = this.props;
 
         if (!token) {
             return(
                 <View style={{padding: 16}}>
-                    <Text>Для того, чтобы увидеть список друзей, нужно войти в систему</Text>
+                    <Text>Для того, чтобы увидеть список друзей, нужно войти в систему и дать приложению доступ к списку своих контактов.</Text>
                     <Button onPress={showModal} style={{marginTop: 16}} rounded><Text>Войти</Text></Button>
                     <SessionsModal sessionModalVisible={sessionModalVisible} onSignIn={onSignIn} onRequest={onRequest} showModal={showModal} hideModal={hideModal}/>
                 </View>
@@ -35,11 +35,15 @@ export default class ContactsScreen extends React.PureComponent {
 
         if (isLoading) { return <Spinner />; }
 
+        if (!permissionsGiven) { return <Text style={{padding: 16}}>Приложению нужен доступ к вашему списку контактов для того, чтобы вы могли найти друзей и друзей их друзей, кто продает машину.</Text>; }
+
+        if (fAds.length === 0 && fofAds.length === 0) { return <Text style={{padding: 16}}>Ваши друзья не разместили объявлений о продаже машины, либо синхронизация контактов еще не завершена. Она может занять некоторое время, в зависимости от количества контактов и загруженности системы. Пожалуйста, попробуйте позже.</Text>; }
+
         return(
             <View style={{flex:1, width: "100%", height: 520}}>
                 <Tabs locked renderTabBar={()=> <ScrollableTab />}>
                     <Tab heading="Друзья">
-                        {fAds.length === 0 && <Text>У вас нет друзей</Text>}
+                        {fAds.length === 0 && <Text style={{padding: 16}}>Объявления друзей не найдены</Text>}
                         {fAds.length > 0 && <AdsListScreen dataProvider={dataProvider}
                             rowRenderer={rowRenderer}
                             layoutProvider={layoutProvider}
@@ -48,7 +52,7 @@ export default class ContactsScreen extends React.PureComponent {
                         />}
                     </Tab>
                     <Tab heading="Друзья друзей">
-                        {fofAds.length === 0 && <Text>У вас нет друзей</Text>}
+                        {fofAds.length === 0 && <Text style={{padding: 16}}>Объявления друзей ваших друзей не найдены</Text>}
                         {fofAds.length > 0 && <AdsListScreen dataProvider={dataProvider}
                             rowRenderer={rowRenderer}
                             layoutProvider={layoutProvider}
@@ -77,5 +81,6 @@ ContactsScreen.propTypes = {
     onRequest: PropTypes.func.isRequired,
     nav: PropTypes.object.isRequired,
     token: PropTypes.string,
-    sessionModalVisible: PropTypes.bool.isRequired
+    sessionModalVisible: PropTypes.bool.isRequired,
+    permissionsGiven: PropTypes.bool.isRequired
 };

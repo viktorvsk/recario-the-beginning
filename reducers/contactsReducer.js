@@ -3,7 +3,8 @@ import * as ActionTypes from "../actions/actionTypes";
 const initialSetting = {
     fAds: [],
     fofAds: [],
-    isLoading: true
+    isLoading: true,
+    permissionsGiven: true
 };
 
 export default function contactsRedducer(state = initialSetting, action ={}){
@@ -27,20 +28,28 @@ export default function contactsRedducer(state = initialSetting, action ={}){
             fAds: [],
             fofAds: []
         };
+    case ActionTypes.UPDATE_CONTACTS_SUCCESS:
+        return {
+            ...state,
+            permissionsGiven: true
+        }
     case ActionTypes.UPDATE_CONTACTS_STARTED:
         return {
             ...state,
-            isLoading: true,
             fAds: [],
             fofAds: []
         };
     case ActionTypes.UPDATE_CONTACTS_FAILED:
         return {
             ...state,
-            isLoading: false,
             fAds: [],
             fofAds: []
         };
+    case ActionTypes.CONTACTS_PERMISSIONS_DENIED:
+        return {
+            ...state,
+            permissionsGiven: false
+        }
     default:
         return state;
     }

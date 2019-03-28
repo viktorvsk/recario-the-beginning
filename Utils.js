@@ -23,3 +23,5 @@ export function filterAds(ads, filters) {
         return matchesGearType && matchesFuelType && matchesWheelsType && matchesCity;
     });
 }
+
+export const notification = { ref: {} };

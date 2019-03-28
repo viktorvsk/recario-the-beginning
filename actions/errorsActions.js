@@ -1,5 +1,7 @@
-import * as ActionTypes from "../actions/actionTypes";
+import {notification} from "../Utils";
 
 export function displayError(error) {
-    return {type: ActionTypes.SET_ERROR, error: error};
+    if (!error || !error.data) { return; }
+    const message = error.data.message ? error.data.message : error.data;
+    notification.ref.show({message: message});
 }

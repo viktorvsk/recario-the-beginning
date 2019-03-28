@@ -10,7 +10,7 @@ export function loadSuggestions(value) {
             .then(modelsPayload => dispatch({type: ActionTypes.MAYBE_UPDATE_SUGGESTIONS, suggestions: modelsPayload.data, value: value}))
             .catch((error) => {
                 dispatch({type: ActionTypes.LOAD_SUGGESTIONS_FAILED});
-                dispatch(displayError(error));
+                displayError(error.response);
             });
     };
 }

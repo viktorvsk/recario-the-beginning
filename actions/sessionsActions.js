@@ -15,7 +15,7 @@ export function signIn(phone, code) {
             })
             .catch((error) => {
                 dispatch({type: ActionTypes.SIGN_IN_FAILED});
-                dispatch(displayError(error));
+                displayError(error.response);
             });
     };
 }
@@ -30,7 +30,7 @@ export function requestCode(phone) {
             })
             .catch((error) => {
                 dispatch({type: ActionTypes.REQUEST_CODE_FAILED});
-                dispatch(displayError(error));
+                displayError(error.response);
             });
     };
 }
@@ -48,7 +48,7 @@ export function signOut() {
             })
             .catch((error) => {
                 dispatch({type: ActionTypes.SIGN_OUT_FAILED});
-                dispatch(displayError(error));
+                displayError(error.response);
             });
     };
 }

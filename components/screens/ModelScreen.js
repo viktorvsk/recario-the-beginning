@@ -36,7 +36,7 @@ export default class ModelScreen extends React.PureComponent {
 
                     {years.length > 0 && !currentYear && !adsLoading &&
                         <Content padder>
-                            <Text>Найдено {years.map(row => row.ads_count).reduce((a, b) => { return a + b })} объявлений {title}.</Text>
+                            <Text>Найдено {years.map(row => row.ads_count).reduce((a, b) => { return a + b; })} объявлений {title}.</Text>
                             <Text>От {years[0].year} до {years[years.length - 1].year} года.</Text>
                             <Text>От ${years[0].min_price} до ${years[0].max_price}</Text>
                             <Text>Выберите год, чтобы посмотреть объявления.</Text>

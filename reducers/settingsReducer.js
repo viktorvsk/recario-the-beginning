@@ -48,6 +48,16 @@ export default function settingsReducer(state = initialState, action = {}) {
             })
 
         };
+    case ActionTypes.SIGN_IN_FAILED:
+        return {
+            ...state,
+            sessionModalVisible: false
+        };
+    case ActionTypes.REQUEST_CODE_FAILED:
+        return {
+            ...state,
+            sessionModalVisible: false
+        };
     case ActionTypes.SIGN_IN_SUCCESS:
         return {
             ...state,
@@ -57,7 +67,7 @@ export default function settingsReducer(state = initialState, action = {}) {
         return {
             ...state,
             isSignOutLoading: true
-        }
+        };
     case ActionTypes.SIGN_OUT_SUCCESS:
         return {
             ...state,
@@ -69,7 +79,7 @@ export default function settingsReducer(state = initialState, action = {}) {
         return {
             ...state,
             isSignOutLoading: false
-        }
+        };
     case ActionTypes.SHOW_SESSION_MODAL:
         return {
             ...state,

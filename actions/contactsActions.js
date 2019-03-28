@@ -13,7 +13,7 @@ export function updateContacts(contacts) {
             if (payload.data.message === "ok") { dispatch({type: ActionTypes.UPDATE_CONTACTS_SUCCESS}); }
         }).catch((error) => {
             dispatch({type: ActionTypes.UPDATE_CONTACTS_FAILED});
-            dispatch(displayError(error));
+            displayError(error.response);
             clearAccessToken();
             dispatch({type: ActionTypes.SIGN_OUT_SUCCESS});
         });
@@ -30,7 +30,7 @@ export function getContacts() {
             dispatch({type: ActionTypes.GET_CONTACTS_SUCCESS, fAds: payload.data.friends_ads, fofAds: payload.data.friends_of_friends_ads});
         }).catch((error) => {
             dispatch({type: ActionTypes.GET_CONTACTS_FAILED});
-            dispatch(displayError(error));
+            displayError(error.response);
             clearAccessToken();
             dispatch({type: ActionTypes.SIGN_OUT_SUCCESS});
         });

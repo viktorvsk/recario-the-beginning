@@ -12,7 +12,7 @@ export default function contactsRedducer(state = initialSetting, action ={}){
         return {
             ...state,
             isLoading: true
-        }
+        };
     case ActionTypes.GET_CONTACTS_SUCCESS:
         return {
             ...state,

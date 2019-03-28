@@ -31,5 +31,6 @@ SettingsScreen.propTypes = {
     setAdsSource: PropTypes.func.isRequired,
     currentAdsSourceId: PropTypes.number.isRequired,
     onSignOut: PropTypes.func.isRequired,
-    token: PropTypes.string
+    token: PropTypes.string,
+    isSignOutLoading: PropTypes.bool.isRequired
 };

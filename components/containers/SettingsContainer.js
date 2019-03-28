@@ -17,11 +17,11 @@ class SettingsContainer extends React.PureComponent {
 
       return(
           <SettingsScreen adsSources={adsSources}
-                          setAdsSource={setAdsSource}
-                          currentAdsSourceId={currentAdsSourceId}
-                          onSignOut={onSignOut}
-                          token={token}
-                          isSignOutLoading={isSignOutLoading}
+              setAdsSource={setAdsSource}
+              currentAdsSourceId={currentAdsSourceId}
+              onSignOut={onSignOut}
+              token={token}
+              isSignOutLoading={isSignOutLoading}
           />
       );
   }

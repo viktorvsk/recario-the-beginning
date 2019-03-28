@@ -9,7 +9,7 @@ export function fetchSettings() {
             .then(settingsPayload => { dispatch({type: ActionTypes.GET_SETTINGS_SUCCESS, settings: settingsPayload.data}); })
             .catch((error) => {
                 dispatch({type: ActionTypes.GET_SETTINGS_FAIL});
-                dispatch(displayError(error));
+                displayError(error.response);
             });
     };
 }

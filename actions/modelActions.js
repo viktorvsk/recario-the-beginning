@@ -9,7 +9,7 @@ export function loadModel(id) {
             .then(modelPayload => dispatch({type: ActionTypes.GET_MODEL_SUCCESS, model: modelPayload.data}))
             .catch((error) => {
                 dispatch({type: ActionTypes.GET_MODEL_FAILED});
-                dispatch(displayError(error));
+                displayError(error.response);
             });
     };
 }
@@ -21,7 +21,7 @@ export function modelFiltered(id, year) {
             .then(adsPayload => dispatch({type: ActionTypes.GET_ADS_SUCCESS, ads: adsPayload.data, id: id, year: year}))
             .catch((error) => {
                 dispatch({type: ActionTypes.GET_ADS_FAILED});
-                dispatch(displayError(error));
+                displayError(error.response);
             });
     };
 }

@@ -1,6 +1,11 @@
 import React from "react";
+import {View} from "react-native";
 import {Provider} from "react-redux";
 import configureStore from "./store/configureStore";
+
+import {notification} from "./Utils";
+
+import Notification from "./components/Notification";
 
 import {Font} from "expo";
 
@@ -17,9 +22,12 @@ export default class App extends React.Component {
 
     render () {
         return (
-            <Provider store={store}>
-                <Root />
-            </Provider>
+            <View style={{flex: 1}}>
+                <Notification ref={ref => notification.ref = ref}/>
+                <Provider store={store}>
+                    <Root />
+                </Provider>
+            </View>
         );
     }
 }

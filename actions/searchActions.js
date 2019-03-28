@@ -11,7 +11,7 @@ export function performSearch() {
             .then(brandsPayload => dispatch({type: ActionTypes.GET_MODELS_SUCCESS, cars: brandsPayload.data}))
             .catch((error) => {
                 dispatch({type: ActionTypes.GET_MODELS_FAILED});
-                dispatch(displayError(error));
+                displayError(error.response);
             });
     };
 }

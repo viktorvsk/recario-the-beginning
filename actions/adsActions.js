@@ -9,7 +9,7 @@ export function loadAd(id) {
             .then(adPayload => dispatch({type: ActionTypes.GET_AD_SUCCESS, ad: adPayload.data}))
             .catch((error) => {
                 dispatch({type: ActionTypes.GET_AD_FAILED});
-                dispatch(displayError(error));
+                displayError(error.response);
             });
     };
 }
@@ -24,7 +24,7 @@ export function askFriend(adId, friendId) {
             })
             .catch((error) => {
                 dispatch({type: ActionTypes.ASK_FRIEND_FAILED});
-                dispatch(displayError(error));
+                displayError(error.response);
             });
     };
 }

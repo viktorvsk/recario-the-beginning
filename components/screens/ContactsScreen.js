@@ -56,29 +56,24 @@ export default class ContactsScreen extends React.PureComponent {
         }
 
         return(
-            <ScrollView style={{flex:1, width: "100%", height: 520}} refreshControl={<RefreshControl refreshing={isLoading} onRefresh={onRefresh}/>}>
-                <Tabs locked renderTabBar={()=> <ScrollableTab />}>
-                    <Tab heading="Друзья">
-                        {fAds.length === 0 && <Text style={{padding: 16}}>Объявления друзей не найдены</Text>}
-                        {fAds.length > 0 && <AdsListScreen dataProvider={dataProvider}
-                            rowRenderer={rowRenderer}
-                            layoutProvider={layoutProvider}
-                            ads={fAds}
-                            title="Объявления ваших друзей"
-                        />}
-                    </Tab>
-                    <Tab heading="Друзья друзей">
-                        {fofAds.length === 0 && <Text style={{padding: 16}}>Объявления друзей ваших друзей не найдены</Text>}
-                        {fofAds.length > 0 && <AdsListScreen dataProvider={dataProvider}
-                            rowRenderer={rowRenderer}
-                            layoutProvider={layoutProvider}
-                            ads={fofAds}
-                            title="Объявления друзей ваших друзей"
-                        />}
-                    </Tab>
-                </Tabs>
-
-            </ScrollView>
+            <Tabs renderTabBar={()=> <ScrollableTab />} style={{flex: 1}}>
+                <Tab heading="Друзья">
+                    {fAds.length === 0 && <Text style={{padding: 16}}>Объявления друзей не найдены</Text>}
+                    {fAds.length > 0 && <AdsListScreen dataProvider={dataProvider}
+                        rowRenderer={rowRenderer}
+                        layoutProvider={layoutProvider}
+                        ads={fAds}
+                    />}
+                </Tab>
+                <Tab heading="Друзья друзей">
+                    {fofAds.length === 0 && <Text style={{padding: 16}}>Объявления друзей ваших друзей не найдены</Text>}
+                    {fofAds.length > 0 && <AdsListScreen dataProvider={dataProvider}
+                        rowRenderer={rowRenderer}
+                        layoutProvider={layoutProvider}
+                        ads={fofAds}
+                    />}
+                </Tab>
+            </Tabs>
         );
     }
 }

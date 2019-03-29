@@ -12,7 +12,7 @@ export default class AdsListScreen extends React.PureComponent {
 
         return(
             <View style={{flex:1, width: "100%", height: 350}}>
-                <Title style={{padding: 10}}>{title}</Title>
+                {title && <Title style={{padding: 10}}>{title}</Title>}
                 <RecyclerListView layoutProvider={layoutProvider}
                     dataProvider={dataProvider.cloneWithRows(ads)}
                     rowRenderer={rowRenderer} />
@@ -26,5 +26,5 @@ AdsListScreen.propTypes = {
     layoutProvider: PropTypes.instanceOf(LayoutProvider).isRequired,
     dataProvider: PropTypes.instanceOf(DataProvider).isRequired,
     rowRenderer: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string
 };

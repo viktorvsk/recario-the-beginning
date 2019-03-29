@@ -22,8 +22,14 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+   "infoPlist": {
+      "NSContactsUsageDescription": "Allow access to your contacts list so you can see your friends using recario and share with them"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSContactsUsageDescription": "Allow access to your contacts list so you can see your friends using recario and share with them"
+      }
     }
   }
 }

@@ -44,7 +44,7 @@ export default class AdScreen extends React.PureComponent {
                                 {carcassType && <ListItem><Left><Text>Кузов</Text></Left><Right style={{minWidth: 100}}><Text>{carcassType}</Text></Right></ListItem>}
                                 {region && <ListItem><Left><Text>Город</Text></Left><Right style={{minWidth: 100}}><Text>{region}</Text></Right></ListItem>}
                                 {color && <ListItem><Left><Text>Цвет</Text></Left><Right style={{minWidth: 100}}><Text>{color}</Text></Right></ListItem>}
-                                {race && <ListItem><Left><Text>Пробег</Text></Left><Right style={{minWidth: 100}}><Text>{race/1000} тыс. км</Text></Right></ListItem>}
+                                {parseInt(race) > 0 && <ListItem><Left><Text>Пробег</Text></Left><Right style={{minWidth: 100}}><Text>{race/1000} тыс. км</Text></Right></ListItem>}
                             </List>
 
                             <Text style={{padding: 16}}>{description || "Описание отсутствует"}</Text>

@@ -26,8 +26,9 @@ export default class API {
     }
 
     static autocompleteModels (query, adsSourceId) {
+        const q = query.toString().trim();
         cancel && cancel();
-        return apiService.get(`/models/autocomplete?q=${query}&ads_source_id=${adsSourceId}`, { cancelToken: new axios.CancelToken(function executor(c) { cancel = c; }) });
+        return apiService.get(`/models/autocomplete?q=${q}&ads_source_id=${adsSourceId}`, { cancelToken: new axios.CancelToken(function executor(c) { cancel = c; }) });
     }
 
     static getSettings () {

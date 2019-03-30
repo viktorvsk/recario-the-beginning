@@ -1,6 +1,7 @@
 import React from "react";
+import {Linking} from "react-native";
 import PropTypes from "prop-types";
-import {Text, Picker, Button, Spinner, Container, Content} from "native-base";
+import {Text, Picker, Button, Spinner, Container, Content, List, ListItem} from "native-base";
 
 
 export default class SettingsScreen extends React.PureComponent {
@@ -21,7 +22,8 @@ export default class SettingsScreen extends React.PureComponent {
                         {adsSources.map(source => <Picker.Item value={source.id} key={source.id} label={source.title}/>)}
                     </Picker>
                     {token && isSignOutLoading && <Spinner />}
-                    {token && !isSignOutLoading && <Button onPress={onSignOut} style={{marginLeft: 16}} rounded><Text>Выйти из системы</Text></Button>}
+                    {token && !isSignOutLoading && <Button onPress={onSignOut} style={{marginLeft: 16, marginTop: 24, marginBottom: 24}} rounded><Text>Выйти из системы</Text></Button>}
+                    <Text style={{padding: 16, color: "#3498db"}} onPress={() => Linking.openURL("https://recar.io/privacy.html")}>Политика конфиденциальности</Text>
                 </Content>
             </Container>
         );

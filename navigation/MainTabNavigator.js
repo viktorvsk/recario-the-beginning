@@ -36,7 +36,7 @@ const ModelStack = createStackNavigator({
 
 ModelStack.navigationOptions = {
     tabBarLabel: "Модель",
-    tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === "ios" ? "ios-car" : "md-options"}/>
+    tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name={Platform.OS === "ios" ? "ios-car" : "md-car"}/>
 };
 
 const SettingsStack = createStackNavigator({
@@ -49,7 +49,8 @@ SettingsStack.navigationOptions = {
 };
 
 const ContactsStack = createStackNavigator({
-    Contacts: ContactsContainer
+    Contacts: ContactsContainer,
+    Ad: AdContainer
 });
 
 ContactsStack.navigationOptions = {

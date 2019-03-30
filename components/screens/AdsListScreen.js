@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {View, Text, Title} from "native-base";
+import {View, Text, H1} from "native-base";
 import {RecyclerListView} from "recyclerlistview";
 import {DataProvider, LayoutProvider} from "recyclerlistview";
 
@@ -12,7 +12,7 @@ export default class AdsListScreen extends React.PureComponent {
 
         return(
             <View style={{flex:1, width: "100%", height: 350}}>
-                {title && <Title style={{padding: 10}}>{title}</Title>}
+                {title && <H1 style={{textAlign: "center"}}>{title}</H1>}
                 <RecyclerListView layoutProvider={layoutProvider}
                     dataProvider={dataProvider.cloneWithRows(ads)}
                     rowRenderer={rowRenderer} />

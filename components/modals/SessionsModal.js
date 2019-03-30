@@ -9,12 +9,14 @@ export default class SessionsModal extends React.PureComponent {
 
     render () {
         const {onSignIn, onRequest, sessionModalVisible, hideModal} = this.props;
+        const onClose = () => {};
 
         return(
             <View>
                 <Modal animationType="slide"
                     transparent={true}
                     visible={sessionModalVisible}
+                    onRequestClose={onClose}
                 >
                     <View style={styles.modal}>
                         <Icon name="ios-close" onPress={hideModal} style={styles.close}/>

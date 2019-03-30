@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {Image} from "react-native";
-import {Button, Container, Content, Spinner, Text, Title, Picker, Item, View, Form, Tabs, Tab, ScrollableTab} from "native-base";
+import {Button, Container, Content, Spinner, Text, H1, Picker, Item, View, Form, Tabs, Tab, ScrollableTab} from "native-base";
 
 import {filterAds} from "../../Utils";
 
@@ -20,10 +20,10 @@ export default class ModelScreen extends React.PureComponent {
         return(
             <Container padder>
                 <Content>
-                    <Tabs renderTabBar={()=> <ScrollableTab />} onChangeTab={({ref}) => { onChange(currentModelId, parseInt(ref.props.heading)); }}>
+                    <Tabs tabBarUnderlineStyle={{ backgroundColor: "transparent" }} initialPage={null} renderTabBar={()=> <ScrollableTab />} onChangeTab={({ref}) => { onChange(currentModelId, parseInt(ref.props.heading)); }}>
                         {years && years.map(row => <Tab heading={row.year.toString()} key={row.year.toString()}></Tab>)}
                     </Tabs>
-                    <Title>{title}</Title>
+                    <H1 style={{textAlign: "center"}}>{title}</H1>
 
                     <Image style={{ height: 300, flex: 1 }} source={{uri: preview}} />
 
@@ -31,7 +31,7 @@ export default class ModelScreen extends React.PureComponent {
                         <Content padder>
                             <Text>Найдено {years.map(row => row.ads_count).reduce((a, b) => { return a + b; })} объявлений {title}.</Text>
                             <Text>От {years[0].year} до {years[years.length - 1].year} года.</Text>
-                            <Text>От ${years[0].min_price} до ${years[0].max_price}</Text>
+                            <Text>От ${Math.min.apply(Math, years.map(y => y.min_price))} до ${Math.max.apply(Math, years.map(y => y.max_price))}</Text>
                             <Text>Выберите год, чтобы посмотреть объявления.</Text>
                         </Content>
                     }

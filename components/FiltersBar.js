@@ -15,11 +15,21 @@ export default class FiltersBar extends React.PureComponent {
         const onFuelChange = value => onChange("q[fuel_type_id]", value);
         const onWheelsChange = value => onChange("q[wheels_type_id]", value);
         const onCarcassChange = value => onChange("q[carcass_type_id]", value);
-
         const onSearch = () => {
             nav.push("SearchResults");
             onSubmit();
         };
+
+        let priceString = `от $${filters["q[price_min]"]} до $${filters["q[price_max]"]}`;
+        if (filters["q[price_max]"] === 100000 && filters["q[price_min]"] === 0) {
+            priceString = "Любая";
+        } else if (filters["q[price_min]"] === 0) {
+            priceString = `до $${filters["q[price_max]"]}`;
+        } else if (filters["q[price_max]"] === 100000) {
+            priceString = `от $${filters["q[price_min]"]} и выше`;
+        }
+
+
 
         const pickerGenerator = option => <Picker.Item value={option.id} key={option.id} label={option.title}/>;
 
@@ -29,7 +39,7 @@ export default class FiltersBar extends React.PureComponent {
                     <View style={{flex: 1}}>
                         <View style={{ height: 30}}>
                             <Text style={{position: "absolute"}}>Цена</Text>
-                            <Text style={{textAlign: "right"}}>от ${filters["q[price_min]"]} до ${filters["q[price_max]"]}</Text>
+                            <Text style={{textAlign: "right"}}>{priceString}</Text>
                         </View>
                         <View style={{ justifyContent: "center", flexDirection: "row", width: "100%" }}>
                             <MultiSlider values={[filters["q[price_min]"], filters["q[price_max]"]]}
@@ -37,7 +47,7 @@ export default class FiltersBar extends React.PureComponent {
                                 onValuesChange={onPriceChange}
                                 min={0}
                                 max={100000}
-                                step={500}
+                                step={1000}
                                 allowOverlap
                                 snapped
                             />
@@ -65,7 +75,7 @@ export default class FiltersBar extends React.PureComponent {
                 </Item>
 
                 <Item picker style={{paddingLeft: 15}}>
-                    <Text style={{width: "50%"}}>КПП</Text>
+                    <Text style={{width: "50%"}}>Тип КПП</Text>
                     <Picker mode="dropdown"
                         iosHeader="Выберите КПП"
                         headerBackButtonText="Назад"

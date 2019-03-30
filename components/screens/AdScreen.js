@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {RefreshControl} from "react-native";
-import {Container, Content, Text, Title, List, ListItem, Left, Right, Button, Body, Tabs, Tab, ScrollableTab} from "native-base";
+import {RefreshControl, Linking} from "react-native";
+import {Container, Content, Text, Title, H1, List, ListItem, Left, Right, Button, Body, Tabs, Tab, ScrollableTab} from "native-base";
 import Gallery from "react-native-image-gallery";
 
 import {mapTitleById} from "../../Utils";
@@ -21,34 +21,49 @@ export default class AdScreen extends React.PureComponent {
         const onRefresh = () => {
             loadAd(id);
         };
+        const descriptionTab = <React.Fragment>
+            <H1 style={{textAlign: "center"}}>{title} {year}</H1>
+            <Title style={{color: "#3498db", fontSize: 18, padding: 10}}>${price}</Title>
+
+            {imagesURLs.length > 0 && <Gallery
+                style={{ flex: 1, backgroundColor: "#fff", padding: 0, margin: 0, height: 300 }}
+                images={imagesURLs}
+            />}
+
+            <List>
+                {gearType && <ListItem><Left><Text>Коробка</Text></Left><Right style={{minWidth: 100}}><Text>{gearType}</Text></Right></ListItem>}
+                {fuelString && <ListItem><Left><Text>Топливо</Text></Left><Right style={{minWidth: 100}}><Text>{fuelString}</Text></Right></ListItem>}
+                {wheelsType && <ListItem><Left><Text>Привод</Text></Left><Right style={{minWidth: 100}}><Text>{wheelsType}</Text></Right></ListItem>}
+                {carcassType && <ListItem><Left><Text>Кузов</Text></Left><Right style={{minWidth: 100}}><Text>{carcassType}</Text></Right></ListItem>}
+                {region && <ListItem><Left><Text>Город</Text></Left><Right style={{minWidth: 100}}><Text>{region}</Text></Right></ListItem>}
+                {color && <ListItem><Left><Text>Цвет</Text></Left><Right style={{minWidth: 100}}><Text>{color}</Text></Right></ListItem>}
+                {parseInt(race) > 0 && <ListItem><Left><Text>Пробег</Text></Left><Right style={{minWidth: 100}}><Text>{race/1000} тыс. км</Text></Right></ListItem>}
+            </List>
+
+            <Text style={{padding: 16}}>{description || "Описание отсутствует"}</Text>
+            <Text style={{padding: 16, color: "#3498db"}} onPress={() => Linking.openURL(url)}>Источник</Text>
+        </React.Fragment>;
+        const onlyDescription = versions.length === 0 &&
+                                    (typeof friends !== "object" || friends.length === 0) &&
+                                    (typeof other_ads !== "object" || other_ads.length === 0);
+
+        if (onlyDescription) {
+            return(
+                <Container>
+                    <Content refreshControl={<RefreshControl onRefresh={onRefresh}/>}>
+                        {descriptionTab}
+                    </Content>
+                </Container>
+            );
+        }
 
         return(
-
             <Container>
                 <Content refreshControl={<RefreshControl onRefresh={onRefresh}/>}>
 
                     <Tabs renderTabBar={()=> <ScrollableTab />}>
                         <Tab heading="Описание">
-                            <Title>{title} {year}</Title>
-                            <Title style={{color: "#3498db", fontSize: 18, padding: 10}}>${price}</Title>
-
-                            {imagesURLs.length > 0 && <Gallery
-                                style={{ flex: 1, backgroundColor: "#fff", padding: 0, margin: 0, height: 300 }}
-                                images={imagesURLs}
-                            />}
-
-                            <List>
-                                {gearType && <ListItem><Left><Text>Коробка</Text></Left><Right style={{minWidth: 100}}><Text>{gearType}</Text></Right></ListItem>}
-                                {fuelString && <ListItem><Left><Text>Топливо</Text></Left><Right style={{minWidth: 100}}><Text>{fuelString}</Text></Right></ListItem>}
-                                {wheelsType && <ListItem><Left><Text>Привод</Text></Left><Right style={{minWidth: 100}}><Text>{wheelsType}</Text></Right></ListItem>}
-                                {carcassType && <ListItem><Left><Text>Кузов</Text></Left><Right style={{minWidth: 100}}><Text>{carcassType}</Text></Right></ListItem>}
-                                {region && <ListItem><Left><Text>Город</Text></Left><Right style={{minWidth: 100}}><Text>{region}</Text></Right></ListItem>}
-                                {color && <ListItem><Left><Text>Цвет</Text></Left><Right style={{minWidth: 100}}><Text>{color}</Text></Right></ListItem>}
-                                {parseInt(race) > 0 && <ListItem><Left><Text>Пробег</Text></Left><Right style={{minWidth: 100}}><Text>{race/1000} тыс. км</Text></Right></ListItem>}
-                            </List>
-
-                            <Text style={{padding: 16}}>{description || "Описание отсутствует"}</Text>
-                            <Text style={{padding: 16}}>Источник: {url}</Text>
+                            {descriptionTab}
                         </Tab>
                         {versions.length > 0 && <Tab heading="История цен">
                             <ListItem><Body><Text>${price} (сейчас)</Text></Body></ListItem>

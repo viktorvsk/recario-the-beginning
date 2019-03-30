@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 
-import {Spinner} from "native-base";
+import {Spinner, Text} from "native-base";
 
 import {loadAd, askFriend} from "../../actions/adsActions";
 
@@ -22,6 +22,8 @@ class AdContainer extends React.PureComponent {
   UNSAFE_componentWillReceiveProps(nextProps){
       const currentId = (this.props.navigation.state.params || {}).id;
       const nextId = (nextProps.navigation.state.params || {}).id;
+      const {ad, navigation, isLoading} = nextProps;
+      if (typeof ad.id === "undefined" && !isLoading) { navigation.popToTop(); }
 
       if (currentId !== nextId) {
           this.props.loadAd(nextId);
@@ -32,7 +34,11 @@ class AdContainer extends React.PureComponent {
   render() {
       const {loadAd, navigation, isLoading, ad, settingsFilters, askFriend} = this.props;
 
+
+
       if (isLoading) { return <Spinner/>; }
+
+      if (typeof ad.id === "undefined") { return <Text style={{padding: 16}}>Что-то пошло не так, пожалуйста, повторите поиск сначала</Text>; }
 
       return(
           <AdScreen loadAd={loadAd} nav={navigation} ad={ad} filters={settingsFilters} askFriend={askFriend}/>

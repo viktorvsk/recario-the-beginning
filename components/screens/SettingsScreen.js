@@ -1,7 +1,7 @@
 import React from "react";
 import {Linking} from "react-native";
 import PropTypes from "prop-types";
-import {Text, Picker, Button, Spinner, Container, Content, List, ListItem} from "native-base";
+import {Text, Picker, Button, Spinner, Container, Content} from "native-base";
 
 
 export default class SettingsScreen extends React.PureComponent {

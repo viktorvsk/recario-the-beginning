@@ -22,14 +22,18 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-   "infoPlist": {
-      "NSContactsUsageDescription": "Allow access to your contacts list so you can see your friends using recario and share with them"
-    },
     "ios": {
+      "bundleIdentifier": "com.viktorvsk.recario",
       "supportsTablet": true,
       "infoPlist": {
         "NSContactsUsageDescription": "Allow access to your contacts list so you can see your friends using recario and share with them"
       }
+    },
+    "android": {
+      "package": "com.viktorvsk.recario"
+    },
+    "locales": {
+      "ru": "./languages/russian.json"
     }
   }
 }

@@ -17,11 +17,11 @@ const apiService = axios.create({
 export default class API {
 
     static setAccessToken(accessToken) {
-        apiService.defaults.headers.common['X-User-Access-Token'] = accessToken;
+        apiService.defaults.headers.common["X-User-Access-Token"] = accessToken;
     }
 
     static clearAccessToken() {
-        apiService.defaults.headers.common['X-User-Access-Token'] = null;
+        apiService.defaults.headers.common["X-User-Access-Token"] = null;
     }
 
     static search(params, adsSourceId) {

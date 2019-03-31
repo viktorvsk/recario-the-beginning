@@ -22,7 +22,7 @@ export default class ContactsScreen extends React.PureComponent {
     }
 
     render () {
-        const {permissionsGiven, fAds, fofAds, isLoading, rowRenderer, dataProvider, layoutProvider, token, showModal, hideModal, onSignIn, onRequest, sessionModalVisible} = this.props;
+        const {sessionError, permissionsGiven, fAds, fofAds, isLoading, rowRenderer, dataProvider, layoutProvider, token, showModal, hideModal, onSignIn, onRequest, sessionModalVisible} = this.props;
 
         const onRefresh = () => {
             const {postUpdatedContacts, getContacts} = this.props;
@@ -37,7 +37,7 @@ export default class ContactsScreen extends React.PureComponent {
                 <View style={{padding: 16}}>
                     <Text>Для того, чтобы увидеть список друзей, нужно войти в систему и дать приложению доступ к списку своих контактов.</Text>
                     <Button onPress={showModal} style={{marginTop: 16}} rounded><Text>Войти</Text></Button>
-                    <SessionsModal sessionModalVisible={sessionModalVisible} onSignIn={onSignIn} onRequest={onRequest} showModal={showModal} hideModal={hideModal}/>
+                    <SessionsModal sessionModalVisible={sessionModalVisible} onSignIn={onSignIn} onRequest={onRequest} showModal={showModal} hideModal={hideModal} error={sessionError}/>
                 </View>
             );
         }
@@ -94,5 +94,6 @@ ContactsScreen.propTypes = {
     nav: PropTypes.object.isRequired,
     token: PropTypes.string,
     sessionModalVisible: PropTypes.bool.isRequired,
-    permissionsGiven: PropTypes.bool.isRequired
+    permissionsGiven: PropTypes.bool.isRequired,
+    sessionError: PropTypes.object.isRequired
 };

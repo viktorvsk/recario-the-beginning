@@ -8,7 +8,7 @@ import Login from "../Login";
 export default class SessionsModal extends React.PureComponent {
 
     render () {
-        const {onSignIn, onRequest, sessionModalVisible, hideModal} = this.props;
+        const {onSignIn, onRequest, sessionModalVisible, hideModal, error} = this.props;
         const onClose = () => {};
 
         return(
@@ -20,7 +20,7 @@ export default class SessionsModal extends React.PureComponent {
                 >
                     <View style={styles.modal}>
                         <Icon name="ios-close" onPress={hideModal} style={styles.close}/>
-                        <Login onSignIn={onSignIn} onRequest={onRequest}/>
+                        <Login onSignIn={onSignIn} onRequest={onRequest} error={error}/>
                     </View>
 
 
@@ -50,5 +50,6 @@ SessionsModal.propTypes = {
     onRequest: PropTypes.func.isRequired,
     showModal: PropTypes.func.isRequired,
     hideModal: PropTypes.func.isRequired,
-    sessionModalVisible: PropTypes.bool.isRequired
+    sessionModalVisible: PropTypes.bool.isRequired,
+    error: PropTypes.object.isRequired
 };

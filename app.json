@@ -30,7 +30,10 @@
       }
     },
     "android": {
-      "package": "com.viktorvsk.recario"
+      "package": "com.viktorvsk.recario",
+      "permissions": [
+        "CONTACTS"
+      ]
     },
     "locales": {
       "ru": "./languages/russian.json"

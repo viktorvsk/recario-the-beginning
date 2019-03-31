@@ -21,7 +21,7 @@ class ContactsContainer extends React.PureComponent {
   }
 
   render() {
-      const {permissionsGiven, showModal, hideModal, sessionModalVisible, token, navigation, postUpdatedContacts, getContacts, fAds, fofAds, isLoading, settingsFilters, loadAd} = this.props;
+      const {sessionError, permissionsGiven, showModal, hideModal, sessionModalVisible, token, navigation, postUpdatedContacts, getContacts, fAds, fofAds, isLoading, settingsFilters, loadAd} = this.props;
       const dataProvider = new DataProvider((r1, r2) => r1.key !== r2.key);
       const rowRenderer = (type, data) => <AdCar withTitle={true} filters={settingsFilters} ad={data} nav={navigation} onPress={() => {
           loadAd(data.id);
@@ -63,6 +63,7 @@ class ContactsContainer extends React.PureComponent {
               onRequest={onRequest}
               nav={navigation}
               permissionsGiven={permissionsGiven}
+              sessionError={sessionError}
           />
 
       );
@@ -77,7 +78,8 @@ function mapStateToProps(state) {
         isLoading: state.contacts.isLoading,
         settingsFilters: state.settings.filters,
         sessionModalVisible: state.settings.sessionModalVisible,
-        permissionsGiven: state.contacts.permissionsGiven
+        permissionsGiven: state.contacts.permissionsGiven,
+        sessionError: state.settings.sessionError
     };
 }
 
@@ -93,7 +95,7 @@ function mapDispatchToProps(dispatch) {
             const {status} = await Permissions.askAsync(Permissions.CONTACTS);
             if (status === "granted") {
                 const contacts = await Contacts.getContactsAsync({fields: [Contacts.PHONE_NUMBERS]});
-                const contactsNormalizer = c => { return { name: c.name, phoneNumbers: c.phoneNumbers.map(p => p.digits)}; };
+                const contactsNormalizer = c => { return { name: c.name, phoneNumbers: c.phoneNumbers.map(p => p.digits || p.number)}; };
                 const normalizedContacts = contacts.data.filter(c => c.phoneNumbers).map(contactsNormalizer);
                 dispatch(updateContacts(normalizedContacts));
             } else {
@@ -121,6 +123,7 @@ ContactsContainer.propTypes = {
     signIn: PropTypes.func.isRequired,
     requestCode: PropTypes.func.isRequired,
     sessionModalVisible: PropTypes.bool.isRequired,
-    permissionsGiven: PropTypes.bool.isRequired
+    permissionsGiven: PropTypes.bool.isRequired,
+    sessionError: PropTypes.object.isRequired
 };
 

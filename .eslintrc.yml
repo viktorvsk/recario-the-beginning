@@ -30,6 +30,7 @@ globals:
   process: readable
   module: readable
   require: readable
+  __DEV__: readable
 settings:
   react:
     version: detect

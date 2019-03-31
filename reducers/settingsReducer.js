@@ -12,7 +12,8 @@ const initialState = {
     adsSources: [{ title: "", id: 1, selected: true}],
     accessToken: undefined,
     sessionModalVisible: false,
-    isSignOutLoading: false
+    isSignOutLoading: false,
+    sessionError: {}
 };
 
 export default function settingsReducer(state = initialState, action = {}) {

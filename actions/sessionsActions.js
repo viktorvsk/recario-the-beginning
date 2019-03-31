@@ -37,7 +37,7 @@ export function requestCode(phone) {
 }
 
 export function signOut() {
-    return function(dispatch, getState) {
+    return function(dispatch) {
         dispatch({type: ActionTypes.SIGN_OUT_STARTED});
 
         return API.signOut()
@@ -45,7 +45,7 @@ export function signOut() {
                 if (signOutPayload.data.message === "ok") {
                     dispatch({type: ActionTypes.SIGN_OUT_SUCCESS});
                     clearAccessToken();
-                    API.clearAccessToken(token);
+                    API.clearAccessToken();
                 }
             })
             .catch((error) => {

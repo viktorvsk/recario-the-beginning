@@ -5,7 +5,7 @@ import {displayError} from "../actions/errorsActions";
 export function loadAd(id) {
     return function(dispatch, getState) {
         dispatch({type: ActionTypes.GET_AD_STARTED});
-        return API.getAd(id, getState().settings.accessToken)
+        return API.getAd(id)
             .then(adPayload => dispatch({type: ActionTypes.GET_AD_SUCCESS, ad: adPayload.data}))
             .catch((error) => {
                 dispatch({type: ActionTypes.GET_AD_FAILED});
@@ -18,7 +18,7 @@ export function askFriend(adId, friendId) {
     return function(dispatch, getState) {
         dispatch({type: ActionTypes.ASK_FRIEND_STARTED});
 
-        return API.askFriend(adId, friendId, getState().settings.accessToken)
+        return API.askFriend(adId, friendId)
             .then(askFriendPayload => {
                 if (askFriendPayload.data.message === "ok") { dispatch({type: ActionTypes.ASK_FRIEND_SUCCESS}); }
             })

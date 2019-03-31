@@ -10,8 +10,9 @@ export function signIn(phone, code) {
         return API.signIn(phone, code)
             .then(signInPayload => {
                 const token = signInPayload.data.access_token;
-                dispatch({type: ActionTypes.SIGN_IN_SUCCESS, token: token});
                 setAccessToken(token);
+                API.setAccessToken(token);
+                dispatch({type: ActionTypes.SIGN_IN_SUCCESS, token: token});
             })
             .catch((error) => {
                 dispatch({type: ActionTypes.SIGN_IN_FAILED});
@@ -39,11 +40,12 @@ export function signOut() {
     return function(dispatch, getState) {
         dispatch({type: ActionTypes.SIGN_OUT_STARTED});
 
-        return API.signOut(getState().settings.accessToken)
+        return API.signOut()
             .then(signOutPayload => {
                 if (signOutPayload.data.message === "ok") {
                     dispatch({type: ActionTypes.SIGN_OUT_SUCCESS});
                     clearAccessToken();
+                    API.clearAccessToken(token);
                 }
             })
             .catch((error) => {

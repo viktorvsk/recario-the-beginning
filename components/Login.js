@@ -46,12 +46,12 @@ export default class Login extends React.Component {
                         keyboardType="numeric"
                         onChange={(event) => this.setState({phone: event.nativeEvent.text})}
                     />
-                    {this.state.phoneValidationError && <Body><Text>{this.state.phoneValidationError}</Text></Body>}
+                    {this.state.phoneValidationError && <Body><Text style={{color: "red"}}>{this.state.phoneValidationError}</Text></Body>}
                 </ListItem>
                 {this.state.step === 2 &&
                     <ListItem style={styles.inputField}>
                         <Input placeholder="Код" keyboardType="numeric" onChange={(event) => this.setState({code: event.nativeEvent.text})}/>
-                        {this.state.codeValidationError && <Text>{this.state.codeValidationError}</Text>}
+                        {this.state.codeValidationError && <Text style={{color: "red"}}>{this.state.codeValidationError}</Text>}
                     </ListItem>
                 }
                 <View style={{margin: 20, justifyContent: "flex-end", flexDirection: "row"}}>

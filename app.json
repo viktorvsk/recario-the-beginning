@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -32,7 +32,7 @@
     "android": {
       "package": "com.viktorvsk.recario",
       "permissions": [
-        "CONTACTS"
+        "READ_CONTACTS"
       ]
     },
     "locales": {

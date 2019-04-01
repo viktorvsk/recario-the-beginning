@@ -23,7 +23,7 @@ export default class SettingsScreen extends React.PureComponent {
                     </Picker>
                     {token && isSignOutLoading && <Spinner />}
                     {token && !isSignOutLoading && <Button onPress={onSignOut} style={{marginLeft: 16, marginTop: 24, marginBottom: 24}} rounded><Text>Выйти из системы</Text></Button>}
-                    <Text style={{padding: 16, color: "#3498db"}} onPress={() => Linking.openURL("https://recar.io/privacy.html")}>Политика конфиденциальности</Text>
+                    <Text style={{padding: 16, color: "#3498db"}} onPress={() => Linking.openURL("http://recar.io/privacy.html")}>Политика конфиденциальности</Text>
                 </Content>
             </Container>
         );

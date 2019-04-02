@@ -8,7 +8,7 @@
       "ios",
       "android"
     ],
-    "version": "1.0.6",
+    "version": "1.0.7",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -33,7 +33,8 @@
       "package": "com.viktorvsk.recario",
       "permissions": [
         "READ_CONTACTS"
-      ]
+      ],
+      "versionCode": 2
     },
     "locales": {
       "ru": "./languages/russian.json"

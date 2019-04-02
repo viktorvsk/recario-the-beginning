@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0
     },
     button: {
-        marginTop: 10
+        marginTop: 10,
+        backgroundColor: "#badc58"
     }
 });
 

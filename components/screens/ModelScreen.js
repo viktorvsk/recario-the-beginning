@@ -100,7 +100,7 @@ export default class ModelScreen extends React.PureComponent {
                                 </Picker>
                             </Item>
                             <View style={{margin: 20, justifyContent: "center", flexDirection: "row"}}>
-                                <Button rounded block primary onPress={onPress} style={{width: "90%"}}>
+                                <Button rounded block primary onPress={onPress} style={{width: "90%", backgroundColor: "#badc58"}}>
                                     <Text>Показать {adsToShow.length} объявлений</Text>
                                 </Button>
                             </View>

@@ -127,7 +127,7 @@ export default class FiltersBar extends React.PureComponent {
                     </Picker>
                 </Item>
                 <View style={{margin: 20, justifyContent: "center", flexDirection: "row"}}>
-                    <Button rounded block primary onPress={onSearch} style={{width: "50%"}}>
+                    <Button rounded block primary onPress={onSearch} style={{width: "50%", backgroundColor: '#badc58'}}>
                         <Text>Найти</Text>
                     </Button>
                 </View>

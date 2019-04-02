@@ -10,11 +10,11 @@
     ],
     "version": "1.0.7",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/recario.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/recario.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#badc58"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

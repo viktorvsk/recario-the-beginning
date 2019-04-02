@@ -31,7 +31,7 @@ export default class SettingsScreen extends React.PureComponent {
                 <Text style={{color: "#3498db", marginLeft: 16, marginBottom: 20}} onPress={onPrivacyPress}>Политика конфиденциальности</Text>
                 {token && !isSignOutLoading &&
                     <View style={{marginBottom: 20, justifyContent: "center", flexDirection: "row"}}>
-                        <Button onPress={onSignOut}><Text>Выйти из системы</Text></Button>
+                        <Button onPress={onSignOut} style={{backgroundColor: "#badc58"}}><Text>Выйти из системы</Text></Button>
                     </View>
                 }
             </Container>

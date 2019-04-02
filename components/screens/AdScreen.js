@@ -77,7 +77,7 @@ export default class AdScreen extends React.PureComponent {
                             {friends.map((f) => {
                                 return(
                                     <ListItem key={f.id}>
-                                        <Button onPress={() => askFriend(id, f.id)}><Text>Спросить</Text></Button>
+                                        <Button onPress={() => askFriend(id, f.id)} style={{backgroundColor: "#badc58"}}><Text>Спросить</Text></Button>
                                         <Body><Text>{f.name}</Text></Body>
                                     </ListItem>
                                 );

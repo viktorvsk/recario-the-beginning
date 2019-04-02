@@ -13,7 +13,8 @@ const initialState = {
     accessToken: undefined,
     sessionModalVisible: false,
     isSignOutLoading: false,
-    sessionError: {}
+    sessionError: {},
+    initializeFailed: false
 };
 
 export default function settingsReducer(state = initialState, action = {}) {
@@ -35,7 +36,8 @@ export default function settingsReducer(state = initialState, action = {}) {
     case ActionTypes.GET_SETTINGS_FAIL:
         return {
             ...state,
-            isLoading: false
+            isLoading: false,
+            initializeFailed: true
         };
     case ActionTypes.SET_ADS_SOURCE:
         return {

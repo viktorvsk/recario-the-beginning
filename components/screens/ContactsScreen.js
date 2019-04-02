@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {ScrollView, RefreshControl} from "react-native";
-import {Text, Spinner, Tab, Tabs, ScrollableTab, View, Button} from "native-base";
+import {Text, Tab, Tabs, ScrollableTab, View, Button} from "native-base";
 import {DataProvider, LayoutProvider} from "recyclerlistview";
 import SessionsModal from "../modals/SessionsModal";
 
@@ -36,17 +36,17 @@ export default class ContactsScreen extends React.PureComponent {
             return(
                 <View style={{padding: 16}}>
                     <Text>Для того, чтобы увидеть список друзей, нужно войти в систему и дать приложению доступ к списку своих контактов.</Text>
-                    <Button onPress={showModal} style={{marginTop: 16}} rounded><Text>Войти</Text></Button>
-                    <SessionsModal sessionModalVisible={sessionModalVisible} onSignIn={onSignIn} onRequest={onRequest} showModal={showModal} hideModal={hideModal} error={sessionError}/>
+                    <View style={{justifyContent: "flex-end", flexDirection: "row"}}>
+                        <Button onPress={showModal} style={{marginTop: 16}} rounded><Text>Войти</Text></Button>
+                        <SessionsModal sessionModalVisible={sessionModalVisible} onSignIn={onSignIn} onRequest={onRequest} showModal={showModal} hideModal={hideModal} error={sessionError}/>
+                    </View>
                 </View>
             );
         }
 
-        if (isLoading) { return <Spinner />; }
-
         if (!permissionsGiven) { return <Text style={{padding: 16}}>Приложению нужен доступ к вашему списку контактов для того, чтобы вы могли найти друзей и друзей их друзей, кто продает машину.</Text>; }
 
-        if (fAds.length === 0 && fofAds.length === 0) {
+        if (fAds.length === 0 && fofAds.length === 0 && !isLoading) {
             return(
                 <ScrollView style={{padding: 16}} refreshControl={<RefreshControl refreshing={isLoading} onRefresh={onRefresh}/>}>
                     <Text>Ваши друзья не разместили объявлений о продаже машины, либо синхронизация контактов еще не завершена. Она может занять некоторое время, в зависимости от количества контактов и загруженности системы. Пожалуйста, попробуйте позже.</Text>

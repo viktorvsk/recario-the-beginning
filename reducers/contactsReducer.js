@@ -33,12 +33,6 @@ export default function contactsRedducer(state = initialSetting, action ={}){
             ...state,
             permissionsGiven: true
         };
-    case ActionTypes.UPDATE_CONTACTS_STARTED:
-        return {
-            ...state,
-            fAds: [],
-            fofAds: []
-        };
     case ActionTypes.UPDATE_CONTACTS_FAILED:
         return {
             ...state,

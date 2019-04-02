@@ -43,9 +43,9 @@ export function signOut() {
         return API.signOut()
             .then(signOutPayload => {
                 if (signOutPayload.data.message === "ok") {
-                    dispatch({type: ActionTypes.SIGN_OUT_SUCCESS});
                     clearAccessToken();
                     API.clearAccessToken();
+                    dispatch({type: ActionTypes.SIGN_OUT_SUCCESS});
                 }
             })
             .catch((error) => {

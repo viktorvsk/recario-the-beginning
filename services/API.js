@@ -5,7 +5,7 @@ let baseURL = "";
 if (process.env.NODE_ENV === "production") {
     baseURL = "https://api.recar.io/api/v1";
 } else {
-    baseURL = "http://192.168.0.104:3000/api/v1";
+    baseURL = "https://api.recar.io/api/v1";
 }
 
 let cancel;
@@ -40,6 +40,7 @@ export default class API {
     }
 
     static getSettings() {
+        console.log(123)
         return apiService.get("/settings");
     }
 
